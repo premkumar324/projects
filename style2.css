@@ -1,0 +1,191 @@
+h1{ 
+    background-color: #ecf0f1;
+    text-align: center;
+    color:#6482AD; /* White color for high contrast */
+    font-size: 80px; /* Large font size for prominence */
+    font-family: 'Times New Roman', Times, serif; /* Elegant font family */
+    font-weight: bold; /* Make the text bold */
+    padding-bottom: 20px;
+    margin-bottom: 0 px; /* Space below the heading */
+    padding: 20px; /* Add padding for better spacing */
+    border-radius: 10px; /* Rounded corners for the heading */
+    height: 135px;
+    display: relative;
+    }
+body{
+    background-image: url("images/backgroundimage.jpg");
+    background-size:cover;
+    background-repeat:repeat-y;
+    background-position: center;
+    text-align: left;
+    color:black; 
+    font-size: x-large;
+    margin: 0%;
+    padding: 0%;
+}
+
+table{
+    margin-left:5%;
+    width: 50%;
+    
+}
+th{
+    font-size: 25px;
+}
+td{
+    font-size: 25px;
+}
+caption{
+    font-size: 30px;
+    height: 50px;
+    margin-left: -30%;
+}
+#skillslist{
+    margin-left: 5%;
+}
+#indexlist {
+    list-style-type: none;
+    padding: 0;
+    
+}
+
+#indexlist li {
+    background-color: #E2DAD6; /* Dark background color for contrast */
+    color: #6482AD; /* Light text color for readability */
+    padding: 15px; /* Increase padding for better spacing */
+    margin-bottom: 10px; /* Space between items */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Slight shadow for depth */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+    width: 40%;
+    
+}
+
+#indexlist li:hover {
+    background-color: #6482AD; /* Slightly lighter background on hover */
+    transform: scale(1.02); /* Slightly scale up the item on hover */
+}
+table ,th,td{
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+    border-collapse:collapse;
+}
+.indexlink{  display: block;
+    width: 100%;
+    color: #4E2A1F; /* Rich chocolate text */
+ /* Dark charcoal text */
+    ;
+    height: 100%;
+   
+}
+a{
+    text-decoration: none;
+}
+#footer{
+    position: static;
+    bottom: 0%;
+}
+#profileribbon {
+    display: flex; /* Use Flexbox for layout */
+    align-items: center; /* Vertically center items */
+    padding: 10px; /* Add padding for spacing */
+    background-color: #7FA1C3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+#profileribbon img {
+    margin-bottom: 10px; /* Space between image and text */
+}
+
+#profileribbon a {
+    display: flex; /* Ensure the link behaves like a flex container */
+    align-items: centre; /* Center the image vertically within the link */
+    margin-right: 25px;
+    margin-left: 90px;
+    text-decoration: none; /* Remove underline from link */
+    color: inherit; /* Inherit text color */
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box; /* Include padding and border in element’s total width and height */
+}
+
+#content{
+    padding: 5%;
+}
+#footer{
+    padding: 5%;
+}
+#profilepic{
+height: 250px;
+}
+#ribbontext {
+    width: 70%;
+    font-size: 30px;
+    line-height:1.5;
+    font-family: 'Roboto', sans-serif;
+    color: #F5EDED; /* White text color for contrast against the black background */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Optional: Text shadow for better readability */
+    text-align: center; /* Align text to the left */
+    text-wrap:pretty;
+}
+#feedback{
+    border: 2px solid #3498db; /* Blue border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 10px; /* Add padding inside the textarea */
+    background-color: #F5EDED; /* Dark background color */
+    color: #6482AD; /* Light text color */
+    font-size: 16px; /* Adjust font size for better readability */
+    width: 80%; /* Adjust width */
+    max-width: 600px; /* Max width for responsiveness */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
+    resize: vertical; /* Allow vertical resizing only */
+}
+#feedbackinput{
+    background-color: #3498db; /* Blue background */
+    color: #ffffff; /* White text color */
+    border: none; /* Remove border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 10px 20px; /* Add padding */
+    font-size: 16px; /* Adjust font size */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+}
+#project-ul{
+    list-style:none;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+.project-ul-li{
+list-style: none;
+font-size:larger;
+margin-left: 50px;
+}
+.project-ul-li a{
+    text-decoration: none;
+    color:#393E46;
+    border: #393E46 2px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for 3D effect */
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  font-size: 28px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  padding: 10px;
+}
+.project-ul-li :hover{
+   
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    background-color: #6482AD; 
+    
+}
+.project-ul-li a:hover{
+    transform:scale(1.05);
+    text-decoration:underline;
+}
