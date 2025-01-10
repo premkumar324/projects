@@ -33,7 +33,7 @@
         </div>
     </div>
     <br>
-    <div id="content" class="pt-3 lg:pt-16 pl-[10px]">
+    <div id="content" class="pt-3 hidden lg:block lg:pt-16 pl-[10px]">
         
         <ul id="indexlist" class="list-none gap-2 pl-5 lg:pl-16 flex flex-col lg:pt-7">
             <li class=""><a href="education.html" class="text-[24px] bg-[#e2dad6] hover:scale-105 hover:border-[#6482AD]  transition-all duration-200 ease-in font-serif flex items-center pl-4 hover:shadow-[0_6px_12px_rgba(0,0,0,0.2)] hover:bg-[#6482AD]  border-4 border-[#e2dad6] shadow-[0_3px_3px_rgba(0,0,0,0.2)] rounded-3xl w-72 lg:w-[800px] h-[85px] ">Education</a></li>
@@ -43,11 +43,14 @@
             <li><a href="skills.html" class="text-[24px] bg-[#e2dad6] hover:scale-105 hover:border-[#6482AD] transition-all duration-200 ease-in font-serif flex items-center pl-4 hover:shadow-[0_6px_12px_rgba(0,0,0,0.2)] hover:bg-[#6482AD]  border-4 border-[#e2dad6] shadow-[0_3px_3px_rgba(0,0,0,0.2)] rounded-3xl w-72 lg:w-[800px] h-[85px] ">Skills</a></li>
         </ul>
     </div>
-    <div id="footer" class="pl-[74px] mt-44">
-        <p class="text-2xl ">Contact me on</p>
-        <div class="flex pt-2 relative right-[10px] ">
+    <div id="info-mobile" class="text-sm lg:hidden text-center  px-5" >
+        I’m passionate about web development with expertise in HTML and CSS and Javascript and Tailwind framework. I’ve also honed my skills in data structures and algorithms. Dive into my portfolio to see my projects and get in touch if you'd like to collaborate!
+    </div>
+    <div id="footer" class="lg:pl-[74px]  items-center mt-10 flex flex-col lg:block lg:mt-44">
+        <p class="text-2xl  ">Contact me on</p>
+        <div class="flex pt-2 lg:relative right-[10px] ">
         <a href="https://www.instagram.com/prem_kumar_324?igsh=aHN5MnZhZWtheTdv" target="main" >
-            <img src="img/instaicon.png" alt="Instagram" class="h-12  mx-2">
+            <img src="img/instaicon.png" alt="Instagram" class=" h-12  mx-2">
         </a>
         <a href="https://github.com/premkumar324" target="main">
             <img src="img/githubicon.png" alt="Github" class="h-12  mx-2">
@@ -59,7 +62,7 @@
         <br>
         <textarea id="feedback" placeholder="Plzz give your feedback" rows="5" class="border-2 border-blue-500 rounded-lg p-2 bg-gray-100 text-blue-400 w-4/5 max-w-2xl shadow-md resize-y"></textarea>
         <br>
-        <input type="submit" value="submit" id="feedbackinput" class="bg-blue-500 text-white rounded-lg py-2 px-6 cursor-pointer hover:bg-blue-600 transition absolute left-[74px] duration-300 ease-in-out">
+        <input type="submit" value="submit" id="feedbackinput" class="bg-blue-500 text-white rounded-lg py-2 px-6 cursor-pointer hover:bg-blue-600 transition lg:absolute left-[74px] duration-300 ease-in-out">
     </div>
 </body>
 
