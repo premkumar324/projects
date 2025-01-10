@@ -591,6 +591,10 @@ video {
   margin-top: 11rem;
 }
 
+.mb-\[20px\] {
+  margin-bottom: 20px;
+}
+
 .flex {
   display: flex;
 }
@@ -613,6 +617,10 @@ video {
 
 .h-\[85px\] {
   height: 85px;
+}
+
+.h-44 {
+  height: 11rem;
 }
 
 .w-4\/5 {
@@ -651,8 +659,16 @@ video {
   align-items: center;
 }
 
+.justify-center {
+  justify-content: center;
+}
+
 .gap-2 {
   gap: 0.5rem;
+}
+
+.self-center {
+  align-self: center;
 }
 
 .text-pretty {
@@ -770,6 +786,14 @@ video {
   padding-bottom: 1.25rem;
 }
 
+.pl-10 {
+  padding-left: 2.5rem;
+}
+
+.pl-px {
+  padding-left: 1px;
+}
+
 .text-center {
   text-align: center;
 }
@@ -836,6 +860,79 @@ video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+
+.text-\[\] {
+  color: ;
+}
+
+.text-\[\#\] {
+  color: #;
+}
+
+.text-\[\#F5F5F5\] {
+  --tw-text-opacity: 1;
+  color: rgb(245 245 245 / var(--tw-text-opacity, 1));
+}
+
+.text-\[\#E8E8E8\] {
+  --tw-text-opacity: 1;
+  color: rgb(232 232 232 / var(--tw-text-opacity, 1));
+}
+
+.text-\[\#DCDCDC\] {
+  --tw-text-opacity: 1;
+  color: rgb(220 220 220 / var(--tw-text-opacity, 1));
+}
+
+.text-\[\#E0E0E0\] {
+  --tw-text-opacity: 1;
+  color: rgb(224 224 224 / var(--tw-text-opacity, 1));
+}
+
+.text-\[\#FFA726\] {
+  --tw-text-opacity: 1;
+  color: rgb(255 167 38 / var(--tw-text-opacity, 1));
+}
+
+.text-\[\#FF8A65\] {
+  --tw-text-opacity: 1;
+  color: rgb(255 138 101 / var(--tw-text-opacity, 1));
+}
+
+.text-\[\#FF7043\] {
+  --tw-text-opacity: 1;
+  color: rgb(255 112 67 / var(--tw-text-opacity, 1));
+}
+
+.text-\[\#5C9D8F\] {
+  --tw-text-opacity: 1;
+  color: rgb(92 157 143 / var(--tw-text-opacity, 1));
+}
+
+.text-\[\#4DB6AC\] {
+  --tw-text-opacity: 1;
+  color: rgb(77 182 172 / var(--tw-text-opacity, 1));
+}
+
+.text-\[\#81D4FA\] {
+  --tw-text-opacity: 1;
+  color: rgb(129 212 250 / var(--tw-text-opacity, 1));
+}
+
+.text-\[\#AB47BC\] {
+  --tw-text-opacity: 1;
+  color: rgb(171 71 188 / var(--tw-text-opacity, 1));
+}
+
+.text-\[\#BA68C8\] {
+  --tw-text-opacity: 1;
+  color: rgb(186 104 200 / var(--tw-text-opacity, 1));
+}
+
+.text-\[\#8E44AD\] {
+  --tw-text-opacity: 1;
+  color: rgb(142 68 173 / var(--tw-text-opacity, 1));
 }
 
 .no-underline {
@@ -926,6 +1023,10 @@ video {
     display: none;
   }
 
+  .lg\:h-\[262px\] {
+    height: 262px;
+  }
+
   .lg\:w-\[800px\] {
     width: 800px;
   }
@@ -936,6 +1037,10 @@ video {
 
   .lg\:pb-16 {
     padding-bottom: 4rem;
+  }
+
+  .lg\:pl-16 {
+    padding-left: 4rem;
   }
 
   .lg\:text-4xl {
