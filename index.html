@@ -6,13 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="style.css" rel="stylesheet">
-    
-          <meta name="google-site-verification" content="JPPzEsStVQlXQLgjZjlsZxYBHhqW3NmxA52VItE6sg0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta name="google-site-verification" content="JPPzEsStVQlXQLgjZjlsZxYBHhqW3NmxA52VItE6sg0" />
 </head>
 
-<body class="bg-cover bg-center bg-repeat-y text-black lg:bg-[url(img/backgroundimage.jpg)] " >
-    <h1 class="lg:text-4xl p-2 pt- pb-5 font-[poppins] font-bold text-[#4A4A4A]  lg:pb-16">PREMKUMAR LANDE </h1>
-    <div id="profileribbon" class="flex flex-col  mt-16 lg:mt-0 lg:flex-row pt-10 lg:pt-2 items-center justify-center p-[10px] shadow-[0_4px_8px_rgba(0,0,0,0.2)]" style="background-color: #7FA1C3;">
+<body class="bg-cover  bg-center  text-black lg:bg-[url(img/backgroundimage.jpg)] bg-no-repeat " > 
+    <div id="navbar" class=" flex bg-white items-center z-50 shadow-lg sticky top-0 lg:static justify-between p-5">
+    <h1 class="lg:text-4xl  font-[poppins] font-bold text-[#333333]  lg:pb-14">PREMKUMAR LANDE </h1>
+    <button id="Hamburger" class="fa-solid fa-bars lg:!hidden text-[#2E74B5]  text-3xl "></button>
+    </div>
+    <div id="menu" class="flex flex-col  p-5 lg:hidden text-[#2E74B5] text-3xl gap-7 h-56 w-44 bg-white absolute right-[0px] font-normal"><a href="education.html" class="hover:text-[#81D4FA]">Education</a>
+                            <a href="Projects.html" class="">Projects</a>
+                            <a href="skills.html" class="">Skills</a>    
+    </div>
+    <div id="profileribbon" class="flex flex-col  mt-16 lg:mt-0  lg:flex-row pt-10 lg:pt-2 items-center justify-center p-[10px] shadow-[0_4px_8px_rgba(0,0,0,0.2)]" style="background-color: #7FA1C3;">
         <div>
             <a href="https://www.instagram.com/prem_kumar_324?igsh=aHN5MnZhZWtheTdv" class="flex items-center mr-[25px] ml[90px] no-underline ">
                 <img src="img/profilepic.png" id="profilepic" class=" h-64 lg:h-[262px] pl-4 mb-[20px]  lg:pl-16" />
@@ -64,6 +71,8 @@
         <br>
         <input type="submit" value="submit" id="feedbackinput" class="bg-blue-500 text-white rounded-lg py-2 px-6 cursor-pointer hover:bg-blue-600 transition lg:absolute left-[74px] duration-300 ease-in-out">
     </div>
+    
 </body>
-
+<script src="index.js"></script>
 </html>
+
