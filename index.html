@@ -835,12 +835,10 @@
     <!-- Hamburger Menu -->
     <div class="hamburger-menu">
         <i class="fas fa-bars hamburger-icon"></i>
+        <i class="fas fa-times close-icon"></i>
     </div>
 
     <div class="mobile-nav">
-        <div class="mobile-nav-header">
-            <i class="fas fa-times close-menu"></i>
-        </div>
         <div class="mobile-nav-links">
             <a href="index.html" class="mobile-nav-link active">Home</a>
             <a href="Projects.html" class="mobile-nav-link">Projects</a>
@@ -1032,36 +1030,34 @@
             });
         });
 
-        // Hamburger menu functionality
-        const hamburger = document.querySelector('.hamburger-menu');
-        const navMenu = document.querySelector('.mobile-nav');
-        const menuOverlay = document.querySelector('.menu-overlay');
-        const body = document.body;
+        // Mobile Navigation
+        const hamburgerMenu = document.querySelector('.hamburger-menu');
+        const mobileNav = document.querySelector('.mobile-nav');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
 
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            menuOverlay.classList.toggle('active');
-            body.style.overflow = body.style.overflow === 'hidden' ? '' : 'hidden';
-        });
+        if (hamburgerMenu && mobileNav) {
+            const overlay = document.createElement('div');
+            overlay.classList.add('mobile-nav-overlay');
+            document.body.appendChild(overlay);
 
-        // Close menu when clicking overlay
-        menuOverlay.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-            menuOverlay.classList.remove('active');
-            body.style.overflow = '';
-        });
+            function toggleMobileNav() {
+                mobileNav.classList.toggle('active');
+                hamburgerMenu.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+            }
 
-        // Close menu when clicking a nav link
-        document.querySelectorAll('.mobile-nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-                menuOverlay.classList.remove('active');
-                body.style.overflow = '';
-            });
-        });
+            hamburgerMenu.addEventListener('click', toggleMobileNav);
+            overlay.addEventListener('click', toggleMobileNav);
+
+            if (mobileNavLinks.length > 0) {
+                mobileNavLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        toggleMobileNav();
+                    });
+                });
+            }
+        }
 
         // Circular Menu functionality
         const connectBtn = document.getElementById('connectBtn');

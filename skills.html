@@ -457,13 +457,11 @@
     <!-- Hamburger Menu -->
     <div class="hamburger-menu">
         <i class="fas fa-bars hamburger-icon"></i>
+        <i class="fas fa-times close-icon"></i>
     </div>
 
     <!-- Mobile Navigation Menu -->
     <div class="mobile-nav">
-        <div class="mobile-nav-header">
-            <i class="fas fa-times close-menu"></i>
-        </div>
         <div class="mobile-nav-links">
             <a href="index.html" class="mobile-nav-link">Home</a>
             <a href="Projects.html" class="mobile-nav-link">Projects</a>
@@ -605,27 +603,31 @@
         // Mobile Navigation
         const hamburgerMenu = document.querySelector('.hamburger-menu');
         const mobileNav = document.querySelector('.mobile-nav');
-        const closeMenu = document.querySelector('.close-menu');
         const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-        const overlay = document.createElement('div');
-        overlay.classList.add('mobile-nav-overlay');
-        document.body.appendChild(overlay);
 
-        function toggleMobileNav() {
-            mobileNav.classList.toggle('active');
-            overlay.classList.toggle('active');
-            document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+        if (hamburgerMenu && mobileNav) {
+            const overlay = document.createElement('div');
+            overlay.classList.add('mobile-nav-overlay');
+            document.body.appendChild(overlay);
+
+            function toggleMobileNav() {
+                mobileNav.classList.toggle('active');
+                hamburgerMenu.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+            }
+
+            hamburgerMenu.addEventListener('click', toggleMobileNav);
+            overlay.addEventListener('click', toggleMobileNav);
+
+            if (mobileNavLinks.length > 0) {
+                mobileNavLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        toggleMobileNav();
+                    });
+                });
+            }
         }
-
-        hamburgerMenu.addEventListener('click', toggleMobileNav);
-        closeMenu.addEventListener('click', toggleMobileNav);
-        overlay.addEventListener('click', toggleMobileNav);
-
-        mobileNavLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                toggleMobileNav();
-            });
-        });
 
         // GSAP Animations
         gsap.registerPlugin(ScrollTrigger);

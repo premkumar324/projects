@@ -94,6 +94,22 @@ body {
 .hamburger-icon {
     color: var(--light);
     font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.hamburger-menu.active .hamburger-icon {
+    display: none;
+}
+
+.hamburger-menu .close-icon {
+    display: none;
+    color: var(--light);
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.hamburger-menu.active .close-icon {
+    display: block;
 }
 
 /* Mobile Navigation Menu */
