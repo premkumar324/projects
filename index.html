@@ -284,38 +284,41 @@
             .hero-content {
                 grid-template-columns: 1fr;
                 text-align: center;
-                gap: 2rem;
-                padding: 1rem;
+                gap: 1rem;
+                padding: 0.5rem;
+                padding-top: 3rem;
                 display: flex;
                 flex-direction: column;
             }
 
             .hero-image {
                 order: -1;
-                margin: 2rem auto 1rem;
+                margin: 0 auto;
                 position: relative;
             }
 
             .profile-container {
-                width: 280px;
-                height: 280px;
+                width: 250px;
+                height: 250px;
                 position: relative;
                 margin: 0 auto;
             }
 
             .hero-text {
-                margin-top: 1rem;
+                margin-top: -2rem;
             }
 
             .hero-text h1 {
                 font-size: 2.5rem;
-                position: relative;
-                display: inline-block;
-                margin-bottom: 2rem;
+                margin-bottom: 1.5rem;
+                opacity: 1;
+                transform: none;
                 background: linear-gradient(135deg, var(--primary), var(--secondary));
                 -webkit-background-clip: text;
                 background-clip: text;
                 color: transparent;
+                position: relative;
+                display: inline-block;
             }
 
             .hero-text h1::after {
@@ -331,40 +334,84 @@
             }
 
             .hero-text p {
-                font-size: 1.1rem;
+                font-size: 1rem;
                 line-height: 1.6;
                 color: #e0e0e0;
-                margin: 0 auto 2rem;
+                margin: 0 auto;
                 max-width: 85%;
             }
 
             .cta-buttons {
-                display: grid;
-                grid-template-columns: 1fr;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
                 gap: 1rem;
-                max-width: 280px;
-                margin: 0 auto;
+                margin-top: 1.5rem;
+            }
+
+            .btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+                min-width: 120px;
+            }
+
+            .btn-primary, .btn-outline {
+                width: auto;
             }
 
             .social-links {
-                position: relative;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
                 display: flex;
-                justify-content: center;
-                gap: 1rem;
-                margin: 2rem auto 4rem;
+                justify-content: space-around;
+                align-items: center;
                 padding: 1rem;
-                background: rgba(255, 255, 255, 0.05);
+                background: rgba(26, 26, 26, 0.98);
                 backdrop-filter: blur(10px);
-                border-radius: 16px;
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                max-width: fit-content;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                z-index: 998;
+            }
+
+            .social-link {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 0.3rem;
+                color: #fff;
+                text-decoration: none;
+                opacity: 0.7;
+                transition: all 0.3s ease;
+                font-size: 0.75rem;
+            }
+
+            .social-link i {
+                font-size: 1.2rem;
+                background: linear-gradient(45deg, var(--primary), var(--secondary));
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            .social-link:hover {
+                opacity: 1;
+                transform: translateY(-2px);
+            }
+
+            .hero-content {
+                padding-bottom: calc(4rem + 60px);
             }
         }
 
         @media (max-width: 480px) {
+            .hero-content {
+                padding-top: 2.5rem;
+            }
+
             .profile-container {
-                width: 240px;
-                height: 240px;
+                width: 220px;
+                height: 220px;
             }
 
             .hero-text h1 {
@@ -372,15 +419,30 @@
             }
 
             .hero-text p {
-                font-size: 1rem;
+                font-size: 0.85rem;
                 max-width: 95%;
             }
 
-            .social-links {
-                margin-bottom: 5rem;
+            .social-link {
+                font-size: 0.7rem;
+            }
+
+            .social-link i {
+                font-size: 1.1rem;
+            }
+
+            .btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+                min-width: 110px;
+            }
+
+            .cta-buttons {
+                gap: 0.8rem;
             }
         }
 
+        /* Desktop/Laptop Social Links */
         .social-links {
             position: fixed;
             right: 2rem;
@@ -416,6 +478,10 @@
             box-shadow: 0 5px 15px rgba(129, 212, 250, 0.3);
         }
 
+        .social-link span {
+            display: none;
+        }
+
         .social-link::after {
             content: attr(title);
             position: absolute;
@@ -438,19 +504,83 @@
             visibility: visible;
         }
 
+        /* Mobile Styles */
         @media (max-width: 768px) {
             .social-links {
-                position: relative;
-                right: auto;
-                bottom: auto;
-                justify-content: center;
-                margin: 3rem auto;
-                width: fit-content;
-                flex-wrap: wrap;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: 0;
+                padding: 0.8rem 1rem;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                background: rgba(26, 26, 26, 0.98);
+                backdrop-filter: blur(10px);
+                border-radius: 0;
+                border: none;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                z-index: 998;
+            }
+
+            .social-link {
+                width: auto;
+                height: auto;
+                background: none;
+                border-radius: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 0.3rem;
+                padding: 0.5rem;
+                font-size: 0.75rem;
+            }
+
+            .social-link span {
+                display: block;
+                font-size: 0.75rem;
+                color: #fff;
+            }
+
+            .social-link i {
+                font-size: 1.2rem;
+                background: linear-gradient(45deg, var(--primary), var(--secondary));
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            .social-link:hover {
+                background: none;
+                transform: translateY(-2px);
+                box-shadow: none;
             }
 
             .social-link::after {
                 display: none;
+            }
+
+            .hero-content {
+                padding-bottom: 80px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .social-link {
+                font-size: 0.7rem;
+            }
+
+            .social-link i {
+                font-size: 1.1rem;
+            }
+
+            .social-link span {
+                font-size: 0.7rem;
+            }
+
+            .hero-content {
+                padding-bottom: 70px;
             }
         }
 
@@ -479,6 +609,121 @@
         @keyframes spin {
             100% { transform: rotate(360deg); }
         }
+
+        /* Mobile Navigation Styles */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 75%;
+                background: rgba(26, 26, 26, 0.98);
+                backdrop-filter: blur(10px);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+                transition: 0.3s ease-in-out;
+                z-index: 1000;
+                border-left: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-link {
+                color: #fff;
+                text-decoration: none;
+                font-size: 1.2rem;
+                opacity: 0.7;
+                transition: all 0.3s ease;
+                padding: 0.5rem 2rem;
+                border-radius: 8px;
+            }
+
+            .nav-link:hover, .nav-link.active {
+                opacity: 1;
+                background: rgba(255, 255, 255, 0.1);
+            }
+
+            .hamburger {
+                position: fixed;
+                top: 1rem;
+                right: 1rem;
+                width: 40px;
+                height: 40px;
+                background: rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(10px);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                z-index: 1001;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .hamburger span {
+                position: relative;
+                width: 20px;
+                height: 2px;
+                background: #fff;
+                transition: all 0.3s ease-in-out;
+            }
+
+            .hamburger span::before,
+            .hamburger span::after {
+                content: '';
+                position: absolute;
+                width: 20px;
+                height: 2px;
+                background: #fff;
+                transition: all 0.3s ease-in-out;
+            }
+
+            .hamburger span::before {
+                transform: translateY(-6px);
+            }
+
+            .hamburger span::after {
+                transform: translateY(6px);
+            }
+
+            .hamburger.active span {
+                background: transparent;
+            }
+
+            .hamburger.active span::before {
+                transform: rotate(45deg);
+            }
+
+            .hamburger.active span::after {
+                transform: rotate(-45deg);
+            }
+
+            /* Overlay when menu is open */
+            .menu-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                backdrop-filter: blur(3px);
+                opacity: 0;
+                visibility: hidden;
+                transition: 0.3s ease-in-out;
+                z-index: 999;
+            }
+
+            .menu-overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
     </style>
 </head>
 
@@ -492,7 +737,10 @@
         <div class="loader-content"></div>
     </div>
 
-    <!-- Navigation -->
+    <div class="menu-overlay"></div>
+    <div class="hamburger">
+        <span></span>
+    </div>
     <nav class="nav-menu">
         <a href="#" class="nav-link active">Home</a>
         <a href="Projects.html" class="nav-link">Projects</a>
@@ -500,23 +748,6 @@
         <a href="education.html" class="nav-link">Education</a>
     </nav>
 
-    <!-- Social Links -->
-    <div class="social-links">
-        <a href="https://github.com/premkumar324" class="social-link" target="_blank" title="GitHub">
-            <i class="fab fa-github"></i>
-        </a>
-        <a href="https://www.linkedin.com/in/premkumar-lande-2aa42219b" class="social-link" target="_blank" title="LinkedIn">
-            <i class="fab fa-linkedin"></i>
-        </a>
-        <a href="mailto:premkumarlande.skn.comp@gmail.com" class="social-link" target="_blank" title="Contact Me">
-            <i class="fas fa-envelope"></i>
-        </a>
-        <a href="assets/Premkumar_Lande_Resume.pdf" class="social-link" download title="Download CV">
-            <i class="fas fa-file-download"></i>
-        </a>
-    </div>
-
-    <!-- Hero Section -->
     <section class="hero">
         <div class="floating-shapes">
             <div class="shape1"></div>
@@ -529,14 +760,8 @@
                 <h1>Hi, I'm Premkumar</h1>
                 <p>A passionate Frontend Developer crafting beautiful and functional web experiences. Specialized in React, Tailwind CSS, and modern web technologies.</p>
                 <div class="cta-buttons">
-                    <a href="Projects.html" class="btn btn-primary">
-                        <i class="fas fa-code"></i>
-                        View Projects
-                    </a>
-                    <a href="mailto:premkumar324@gmail.com" class="btn btn-outline">
-                        <i class="fas fa-envelope"></i>
-                        Contact Me
-                    </a>
+                    <a href="#projects" class="btn btn-primary">View Projects</a>
+                    <a href="mailto:premkumar324@gmail.com" class="btn btn-outline">Contact Me</a>
                 </div>
             </div>
             <div class="hero-image">
@@ -564,6 +789,26 @@
             </div>
         </div>
     </section>
+
+    <!-- Social Links Container -->
+    <div class="social-links">
+        <a href="https://github.com/premkumar324" class="social-link" target="_blank" title="GitHub">
+            <i class="fab fa-github"></i>
+            <span>GitHub</span>
+        </a>
+        <a href="https://www.linkedin.com/in/premkumar-lande-1b3b9b1b9/" class="social-link" target="_blank" title="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+            <span>LinkedIn</span>
+        </a>
+        <a href="mailto:premkumar324@gmail.com" class="social-link" title="Contact Me">
+            <i class="fas fa-envelope"></i>
+            <span>Email</span>
+        </a>
+        <a href="resume.pdf" class="social-link" target="_blank" title="Download CV">
+            <i class="fas fa-file-alt"></i>
+            <span>Resume</span>
+        </a>
+    </div>
 
     <script>
         // Custom cursor
@@ -663,6 +908,37 @@
                     scale: 1,
                     duration: 0.3
                 });
+            });
+        });
+
+        // Hamburger menu functionality
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        const menuOverlay = document.querySelector('.menu-overlay');
+        const body = document.body;
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            body.style.overflow = body.style.overflow === 'hidden' ? '' : 'hidden';
+        });
+
+        // Close menu when clicking overlay
+        menuOverlay.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            body.style.overflow = '';
+        });
+
+        // Close menu when clicking a nav link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                menuOverlay.classList.remove('active');
+                body.style.overflow = '';
             });
         });
     </script>
