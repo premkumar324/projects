@@ -3,17 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <h1>Projects</h1>
+    <title>My Projects - Blog App</title>
     <link rel="stylesheet" href="style2.css">
+    <link href="style.css" rel="stylesheet">
 </head>
-<body><ul id="project-ul">
-    <li class="project-ul-li"><a href="Projects/currency converter/index.html" target="_blank">CurrencyConverter</a></li>
-      <li class="project-ul-li"><a href="Projects/tictactoe/index.html" target="_blank">TicTacToe</a></li>
+<body class="bg-gray-100 p-5">
+    <h1 class="text-4xl font-bold text-[#2E74B5] mb-8">Projects</h1>
+    
+    <div class="project-card bg-white rounded-lg shadow-lg p-6 max-w-2xl">
+        <h2 class="text-2xl font-bold text-[#333333] mb-4">Blog App with Appwrite</h2>
+        <p class="text-gray-700 mb-4">A modern blog application built with React and Appwrite backend, featuring user authentication, post creation, and management.</p>
+        
+        <div class="mb-4">
+            <h3 class="text-lg font-semibold mb-2">Key Features:</h3>
+            <ul class="list-disc pl-5 text-gray-700">
+                <li>User Authentication</li>
+                <li>Create, Edit, and Delete Posts</li>
+                <li>Rich Text Editor</li>
+                <li>Responsive Design</li>
+                <li>Real-time Updates</li>
+            </ul>
+        </div>
+        
+        <div class="flex gap-4">
+            <a href="https://blog-app-appwrite-beta.vercel.app/" target="_blank" 
+               class="bg-[#2E74B5] text-white px-6 py-2 rounded-lg hover:bg-[#81D4FA] transition duration-300">
+                View Live Demo
+            </a>
+        </div>
+    </div>
 
-
-  </ul>
-<br><br>        
-<a href="index.html">Back</a>       
+    <div class="mt-8">
+        <a href="index.html" class="text-[#2E74B5] hover:text-[#81D4FA] transition duration-300">← Back to Home</a>
+    </div>
 </body>
 </html>
