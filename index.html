@@ -724,6 +724,165 @@
                 visibility: visible;
             }
         }
+
+        /* Circular Menu Styles */
+        .circular-menu {
+            display: none; /* Hide by default */
+        }
+
+        @media (max-width: 768px) {
+            .circular-menu {
+                position: fixed;
+                bottom: 80px;
+                right: 20px;
+                left: auto;
+                transform: scale(0);
+                display: block;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                z-index: 1000;
+                width: 150px;
+                height: 150px;
+                transform-origin: bottom right;
+            }
+
+            .circular-menu.active {
+                transform: scale(1);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .circular-menu .menu-item {
+                position: absolute;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: var(--primary);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #fff;
+                text-decoration: none;
+                transition: all 0.3s ease;
+                transform: scale(0) rotate(0deg);
+                opacity: 0;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            }
+
+            .circular-menu.active .menu-item {
+                transform: scale(1) rotate(360deg);
+                opacity: 1;
+            }
+
+            /* Position each menu item in an arc */
+            .circular-menu .menu-item:nth-child(1) { /* Email */
+                bottom: 60px;
+                right: 60px;
+            }
+
+            .circular-menu .menu-item:nth-child(2) { /* LinkedIn */
+                bottom: 85px;
+                right: 20px;
+            }
+
+            .circular-menu .menu-item:nth-child(3) { /* GitHub */
+                bottom: 20px;
+                right: 85px;
+            }
+
+            .circular-menu .menu-item:nth-child(4) { /* Resume */
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .circular-menu.active .menu-item:nth-child(1) {
+                transform: scale(1) rotate(0deg);
+            }
+
+            .circular-menu.active .menu-item:nth-child(2) {
+                transform: scale(1) rotate(0deg);
+            }
+
+            .circular-menu.active .menu-item:nth-child(3) {
+                transform: scale(1) rotate(0deg);
+            }
+
+            .circular-menu.active .menu-item:nth-child(4) {
+                transform: scale(1) rotate(0deg);
+            }
+
+            .circular-menu .menu-item:hover {
+                background: var(--secondary);
+                transform: translateY(-3px) scale(1.1) !important;
+            }
+
+            .circular-menu .menu-item i {
+                font-size: 1.2rem;
+            }
+
+            /* Remove overlay */
+            .menu-overlay {
+                display: none;
+            }
+
+            /* Match button style with project button */
+            #connectBtn {
+                background: var(--primary);
+                color: white;
+                border: none;
+            }
+
+            #connectBtn:hover {
+                background: var(--secondary);
+            }
+        }
+
+        @media (min-width: 769px) {
+            .menu-overlay {
+                display: none;
+            }
+            #connectBtn {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .desktop-only {
+                display: none !important;
+            }
+        }
+        @media (min-width: 769px) {
+            .mobile-only {
+                display: none !important;
+            }
+        }
+
+        /* Social Links Container */
+        .social-links-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        @media (max-width: 768px) {
+            .social-links-container {
+                display: none;  /* Hide on mobile */
+            }
+        }
+
+        .social-links-container a {
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
     </style>
 </head>
 
@@ -761,7 +920,11 @@
                 <p>A passionate Frontend Developer crafting beautiful and functional web experiences. Specialized in React, Tailwind CSS, and modern web technologies.</p>
                 <div class="cta-buttons">
                     <a href="#projects" class="btn btn-primary">View Projects</a>
-                    <a href="mailto:premkumar324@gmail.com" class="btn btn-outline">Contact Me</a>
+                    <a href="mailto:premkumar324@gmail.com" class="btn btn-outline desktop-only">Contact Me</a>
+                    <button class="btn btn-primary mobile-only" id="connectBtn">
+                        <i class="fas fa-share-alt"></i>
+                        Connect
+                    </button>
                 </div>
             </div>
             <div class="hero-image">
@@ -790,23 +953,39 @@
         </div>
     </section>
 
-    <!-- Social Links Container -->
-    <div class="social-links">
-        <a href="https://github.com/premkumar324" class="social-link" target="_blank" title="GitHub">
+    <!-- Social Links Container (Desktop Only) -->
+    <div class="social-links-container">
+        <a href="https://github.com/premkumar324" target="_blank" title="GitHub">
             <i class="fab fa-github"></i>
-            <span>GitHub</span>
+            <span class="link-text">GitHub</span>
         </a>
-        <a href="https://www.linkedin.com/in/premkumar-lande-1b3b9b1b9/" class="social-link" target="_blank" title="LinkedIn">
+        <a href="https://www.linkedin.com/in/premkumar-lande-1b3b9b1b9/" target="_blank" title="LinkedIn">
             <i class="fab fa-linkedin"></i>
-            <span>LinkedIn</span>
+            <span class="link-text">LinkedIn</span>
         </a>
-        <a href="mailto:premkumar324@gmail.com" class="social-link" title="Contact Me">
+        <a href="mailto:premkumar324@gmail.com" title="Email">
             <i class="fas fa-envelope"></i>
-            <span>Email</span>
+            <span class="link-text">Email</span>
         </a>
-        <a href="resume.pdf" class="social-link" target="_blank" title="Download CV">
-            <i class="fas fa-file-alt"></i>
-            <span>Resume</span>
+        <a href="resume.pdf" target="_blank" title="Resume">
+            <i class="fas fa-file-download"></i>
+            <span class="link-text">Resume</span>
+        </a>
+    </div>
+
+    <!-- Circular Menu (Mobile Only) -->
+    <div class="circular-menu">
+        <a href="mailto:premkumar324@gmail.com" class="menu-item" title="Email">
+            <i class="fas fa-envelope"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/premkumar-lande-1b3b9b1b9/" class="menu-item" target="_blank" title="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://github.com/premkumar324" class="menu-item" target="_blank" title="GitHub">
+            <i class="fab fa-github"></i>
+        </a>
+        <a href="resume.pdf" class="menu-item" target="_blank" title="Download Resume">
+            <i class="fas fa-file-download"></i>
         </a>
     </div>
 
@@ -939,6 +1118,36 @@
                 navMenu.classList.remove('active');
                 menuOverlay.classList.remove('active');
                 body.style.overflow = '';
+            });
+        });
+
+        // Circular Menu functionality
+        const connectBtn = document.getElementById('connectBtn');
+        const circularMenu = document.querySelector('.circular-menu');
+        const menuItems = document.querySelectorAll('.menu-item');
+
+        // Add stagger delay to menu items
+        menuItems.forEach((item, index) => {
+            item.style.transitionDelay = `${index * 0.05}s`;
+        });
+
+        // Toggle menu on button click
+        connectBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            circularMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!circularMenu.contains(e.target) && !connectBtn.contains(e.target)) {
+                circularMenu.classList.remove('active');
+            }
+        });
+
+        // Close menu when a menu item is clicked
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                circularMenu.classList.remove('active');
             });
         });
     </script>
