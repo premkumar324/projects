@@ -504,83 +504,9 @@
             visibility: visible;
         }
 
-        /* Mobile Styles */
         @media (max-width: 768px) {
             .social-links {
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                margin: 0;
-                padding: 0.8rem 1rem;
-                display: flex;
-                justify-content: space-around;
-                align-items: center;
-                background: rgba(26, 26, 26, 0.98);
-                backdrop-filter: blur(10px);
-                border-radius: 0;
-                border: none;
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
-                z-index: 998;
-            }
-
-            .social-link {
-                width: auto;
-                height: auto;
-                background: none;
-                border-radius: 0;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 0.3rem;
-                padding: 0.5rem;
-                font-size: 0.75rem;
-            }
-
-            .social-link span {
-                display: block;
-                font-size: 0.75rem;
-                color: #fff;
-            }
-
-            .social-link i {
-                font-size: 1.2rem;
-                background: linear-gradient(45deg, var(--primary), var(--secondary));
-                -webkit-background-clip: text;
-                background-clip: text;
-                -webkit-text-fill-color: transparent;
-            }
-
-            .social-link:hover {
-                background: none;
-                transform: translateY(-2px);
-                box-shadow: none;
-            }
-
-            .social-link::after {
-                display: none;
-            }
-
-            .hero-content {
-                padding-bottom: 80px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .social-link {
-                font-size: 0.7rem;
-            }
-
-            .social-link i {
-                font-size: 1.1rem;
-            }
-
-            .social-link span {
-                font-size: 0.7rem;
-            }
-
-            .hero-content {
-                padding-bottom: 70px;
+                display: none;  /* Hide on mobile */
             }
         }
 
@@ -953,23 +879,23 @@
         </div>
     </section>
 
-    <!-- Social Links Container (Desktop Only) -->
-    <div class="social-links-container">
-        <a href="https://github.com/premkumar324" target="_blank" title="GitHub">
+    <!-- Social Links -->
+    <div class="social-links">
+        <a href="https://github.com/premkumar324" class="social-link" target="_blank" title="GitHub">
             <i class="fab fa-github"></i>
-            <span class="link-text">GitHub</span>
+            <span>GitHub</span>
         </a>
-        <a href="https://www.linkedin.com/in/premkumar-lande-1b3b9b1b9/" target="_blank" title="LinkedIn">
+        <a href="https://www.linkedin.com/in/premkumar-lande-1b3b9b1b9/" class="social-link" target="_blank" title="LinkedIn">
             <i class="fab fa-linkedin"></i>
-            <span class="link-text">LinkedIn</span>
+            <span>LinkedIn</span>
         </a>
-        <a href="mailto:premkumar324@gmail.com" title="Email">
+        <a href="mailto:premkumar324@gmail.com" class="social-link" title="Email">
             <i class="fas fa-envelope"></i>
-            <span class="link-text">Email</span>
+            <span>Email</span>
         </a>
-        <a href="resume.pdf" target="_blank" title="Resume">
-            <i class="fas fa-file-download"></i>
-            <span class="link-text">Resume</span>
+        <a href="resume.pdf" class="social-link" target="_blank" title="Download CV">
+            <i class="fas fa-file-alt"></i>
+            <span>Resume</span>
         </a>
     </div>
 
