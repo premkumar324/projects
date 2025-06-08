@@ -3,28 +3,433 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style2.css">
-    
+    <title>Skills - Premkumar Lande</title>
+    <link href="style.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        .skills-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 2rem 2rem;
+        }
+
+        .skill-category {
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            transform: translateY(30px);
+            opacity: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255,255,255,0.1),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .skill-category:hover::before {
+            left: 100%;
+        }
+
+        .skill-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 15px;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .skill-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                125deg,
+                transparent 0%,
+                transparent 40%,
+                rgba(255,255,255,0.1) 50%,
+                transparent 60%,
+                transparent 100%
+            );
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .skill-card:hover::after {
+            transform: translateX(100%);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            background: rgba(255,255,255,0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .skill-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 15px;
+            color: var(--light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-icon::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2));
+            top: -50%;
+            left: -50%;
+            transform: rotate(45deg);
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover .skill-icon::before {
+            top: 100%;
+            left: 100%;
+        }
+
+        .floating-shapes {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            filter: blur(20px);
+            opacity: 0.1;
+            animation: floatShape 20s linear infinite;
+        }
+
+        .shape:nth-child(1) { width: 200px; height: 200px; top: 10%; left: 10%; animation-delay: 0s; }
+        .shape:nth-child(2) { width: 150px; height: 150px; top: 60%; right: 10%; animation-delay: -5s; }
+        .shape:nth-child(3) { width: 100px; height: 100px; bottom: 10%; left: 30%; animation-delay: -10s; }
+
+        @keyframes floatShape {
+            0% { transform: rotate(0deg) translate(0, 0); }
+            25% { transform: rotate(90deg) translate(100px, 100px); }
+            50% { transform: rotate(180deg) translate(0, 200px); }
+            75% { transform: rotate(270deg) translate(-100px, 100px); }
+            100% { transform: rotate(360deg) translate(0, 0); }
+        }
+
+        .skill-info {
+            flex: 1;
+        }
+
+        .skill-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+        }
+
+        .skill-info p {
+            font-size: 1rem;
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .proficiency-bar {
+            height: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .proficiency-level {
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 4px;
+            position: relative;
+            transition: width 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .proficiency-level::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 20px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3));
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .category-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1 >Skills</h1>
-    <ul id="skillslist">
-    <li><big><b style="color: #6482AD">DSA</b> in <b style="color: #6482AD;">C++</b></big></li>
-    <br>
-    <br>
-    <li><big><b style="color: #6482AD;">OOP</b> in <b style="color: #6482AD;">C++ , Java and Python</b></b  ig></li>
-    <br>
-    <br>
-    <li><big>Python basics and libraries like <b style="color:  #6482AD;">Numpy,Pandas,Matplotlib</b></big></li>
-    <br>
-    <br>
-    <li><big><b style="color:  #6482AD;">HTML,CSS,JS,Reactjs</b></big></li>
-    <br>
-    <br>
-    <li><big><b style="color: #6482AD;">Mysql</b></big></li>
-    <br><br>
-    <ul>
-    <a href="index.html" class="relative right-16">Back</a>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Floating Shapes -->
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="Projects.html" class="nav-link">Projects</a>
+        <a href="skills.html" class="nav-link active">Skills</a>
+        <a href="education.html" class="nav-link">Education</a>
+    </nav>
+
+    <div class="skills-container">
+        <h1 class="section-title">Technical Skills</h1>
+
+        <div class="skill-category">
+            <h2 class="category-title">Programming Languages</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="skill-info">
+                        <h3>C++</h3>
+                        <p>Data Structures & Algorithms</p>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-level" style="width: 90%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fab fa-java"></i>
+                    </div>
+                    <div class="skill-info">
+                        <h3>Java</h3>
+                        <p>Object-Oriented Programming</p>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-level" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <div class="skill-info">
+                        <h3>Python</h3>
+                        <p>Data Analysis & Libraries</p>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-level" style="width: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="skill-category">
+            <h2 class="category-title">Web Development</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fab fa-react"></i>
+                    </div>
+                    <div class="skill-info">
+                        <h3>React.js</h3>
+                        <p>Frontend Development</p>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-level" style="width: 90%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fab fa-js"></i>
+                    </div>
+                    <div class="skill-info">
+                        <h3>JavaScript</h3>
+                        <p>Modern ES6+ Features</p>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-level" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fab fa-html5"></i>
+                    </div>
+                    <div class="skill-info">
+                        <h3>HTML5 & CSS3</h3>
+                        <p>Responsive Design</p>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-level" style="width: 95%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="skill-category">
+            <h2 class="category-title">Tools & Technologies</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fab fa-git-alt"></i>
+                    </div>
+                    <div class="skill-info">
+                        <h3>Git & GitHub</h3>
+                        <p>Version Control</p>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-level" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fab fa-node-js"></i>
+                    </div>
+                    <div class="skill-info">
+                        <h3>Node.js</h3>
+                        <p>Backend Development</p>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-level" style="width: 75%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="skill-info">
+                        <h3>MongoDB</h3>
+                        <p>Database Management</p>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-level" style="width: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Custom cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            cursorFollower.style.left = e.clientX + 'px';
+            cursorFollower.style.top = e.clientY + 'px';
+        });
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Animate section title
+        gsap.to('.section-title', {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            scrollTrigger: {
+                trigger: '.section-title',
+                start: 'top 80%',
+            }
+        });
+
+        // Animate skill categories
+        gsap.utils.toArray('.skill-category').forEach((category, i) => {
+            gsap.to(category, {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                scrollTrigger: {
+                    trigger: category,
+                    start: 'top 80%',
+                },
+                delay: i * 0.2
+            });
+        });
+
+        // Hover effects
+        document.querySelectorAll('.skill-card, .nav-link').forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                gsap.to(cursor, {
+                    scale: 1.5,
+                    duration: 0.3
+                });
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                gsap.to(cursor, {
+                    scale: 1,
+                    duration: 0.3
+                });
+            });
+        });
+    </script>
 </body>
 </html>

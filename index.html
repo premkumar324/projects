@@ -8,8 +8,8 @@
     <link href="style.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="icon" type="image/png" href="img/favicon.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
         
@@ -142,13 +142,97 @@
             position: relative;
             opacity: 0;
             transform: translateX(50px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
         }
 
-        .hero-image img {
+        .profile-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            padding: 3px;
+            animation: morphing 10s ease-in-out infinite;
+        }
+
+        @keyframes morphing {
+            0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            25% { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; }
+            50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
+            75% { border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%; }
+            100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+        }
+
+        .profile-photo {
             width: 100%;
-            height: auto;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            height: 100%;
+            object-fit: cover;
+            border-radius: inherit;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tech-icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .tech-icon {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--light);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            animation: floatIcon 4s ease-in-out infinite;
+        }
+
+        .tech-icon i {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .tech-icon:nth-child(1) { top: -20px; left: 50%; transform: translateX(-50%); animation-delay: 0s; }
+        .tech-icon:nth-child(2) { top: 50%; left: -20px; transform: translateY(-50%); animation-delay: 0.5s; }
+        .tech-icon:nth-child(3) { bottom: -20px; left: 50%; transform: translateX(-50%); animation-delay: 1s; }
+        .tech-icon:nth-child(4) { top: 50%; right: -20px; transform: translateY(-50%); animation-delay: 1.5s; }
+        .tech-icon:nth-child(5) { top: 0; right: 0; animation-delay: 2s; }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(0, -10px); }
+        }
+
+        .glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, 
+                rgba(46, 116, 181, 0.3), 
+                rgba(129, 212, 250, 0.1), 
+                transparent 70%);
+            filter: blur(20px);
+            z-index: 0;
+            animation: glowPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
         }
 
         .floating-shapes div {
@@ -333,14 +417,27 @@
                 </div>
             </div>
             <div class="hero-image">
-                <lottie-player 
-                    src="https://lottie.host/58ead2f7-b23f-4367-9ccc-f7d58a3b9649/YqvuoXRBdH.json"
-                    background="transparent"
-                    speed="1"
-                    style="width: 100%; height: 100%;"
-                    loop
-                    autoplay>
-                </lottie-player>
+                <div class="profile-container">
+                    <div class="glow"></div>
+                    <img src="img/profilepic.png" alt="Premkumar Lande" class="profile-photo">
+                    <div class="tech-icons">
+                        <div class="tech-icon">
+                            <i class="fab fa-react"></i>
+                        </div>
+                        <div class="tech-icon">
+                            <i class="fab fa-js"></i>
+                        </div>
+                        <div class="tech-icon">
+                            <i class="fab fa-html5"></i>
+                        </div>
+                        <div class="tech-icon">
+                            <i class="fab fa-css3-alt"></i>
+                        </div>
+                        <div class="tech-icon">
+                            <i class="fab fa-node-js"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
