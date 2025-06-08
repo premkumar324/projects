@@ -307,31 +307,75 @@
 
         .social-links {
             position: fixed;
-            left: 2rem;
-            top: 50%;
-            transform: translateY(-50%);
+            right: 2rem;
+            bottom: 2rem;
             display: flex;
-            flex-direction: column;
             gap: 1rem;
             z-index: 100;
+            background: rgba(46, 116, 181, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem 1.2rem;
+            border-radius: 50px;
+            border: 1px solid rgba(129, 212, 250, 0.2);
         }
 
         .social-link {
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.15);
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--light);
             text-decoration: none;
             transition: all 0.3s ease;
+            font-size: 1.2rem;
+            position: relative;
         }
 
         .social-link:hover {
             background: linear-gradient(45deg, var(--primary), var(--secondary));
-            transform: translateX(5px);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(129, 212, 250, 0.3);
+        }
+
+        .social-link::after {
+            content: attr(title);
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0.5rem 1rem;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .social-link:hover::after {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @media (max-width: 768px) {
+            .social-links {
+                position: relative;
+                right: auto;
+                bottom: auto;
+                justify-content: center;
+                margin: 3rem auto;
+                width: fit-content;
+                flex-wrap: wrap;
+            }
+
+            .social-link::after {
+                display: none;
+            }
         }
 
         .loader {
@@ -382,14 +426,17 @@
 
     <!-- Social Links -->
     <div class="social-links">
-        <a href="https://www.instagram.com/prem_kumar_324" class="social-link" target="_blank">
-            <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://github.com/premkumar324" class="social-link" target="_blank">
+        <a href="https://github.com/premkumar324" class="social-link" target="_blank" title="GitHub">
             <i class="fab fa-github"></i>
         </a>
-        <a href="https://www.linkedin.com/in/premkumar-lande-2aa42219b" class="social-link" target="_blank">
+        <a href="https://www.linkedin.com/in/premkumar-lande-2aa42219b" class="social-link" target="_blank" title="LinkedIn">
             <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="mailto:premkumarlande.skn.comp@gmail.com" class="social-link" target="_blank" title="Contact Me">
+            <i class="fas fa-envelope"></i>
+        </a>
+        <a href="assets/Premkumar_Lande_Resume.pdf" class="social-link" download title="Download CV">
+            <i class="fas fa-file-download"></i>
         </a>
     </div>
 
