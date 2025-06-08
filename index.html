@@ -4,75 +4,458 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Premkumar Lande - Frontend Developer</title>
     <link href="style.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <meta name="google-site-verification" content="JPPzEsStVQlXQLgjZjlsZxYBHhqW3NmxA52VItE6sg0" />
+    <script src="https://unpkg.com/framer-motion/dist/framer-motion.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #2E74B5;
+            --secondary: #81D4FA;
+            --dark: #1a1a1a;
+            --light: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--secondary);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 999;
+            transition: all 0.1s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-follower {
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 999;
+            transition: all 0.2s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .hero {
+            min-height: 100vh;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: var(--light);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--light);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            position: relative;
+            opacity: 0;
+            transform: translateX(50px);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .floating-shapes div {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.1;
+        }
+
+        .shape1 { top: 20%; left: 10%; width: 100px; height: 100px; background: var(--primary); border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+        .shape2 { bottom: 20%; right: 10%; width: 150px; height: 150px; background: var(--secondary); border-radius: 50%; }
+        .shape3 { top: 50%; left: 50%; width: 80px; height: 80px; background: var(--primary); transform: rotate(45deg); }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+
+        .nav-menu {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 100;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 50px;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-link {
+            color: var(--light);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .cta-buttons {
+                justify-content: center;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+        }
+
+        .social-links {
+            position: fixed;
+            left: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 100;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            transform: translateX(5px);
+        }
+
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .loader-content {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--primary);
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 
-<body class="bg-cover  bg-center  text-black lg:bg-[url(img/backgroundimage.jpg)] bg-no-repeat " > 
-    <div id="navbar" class=" flex bg-white items-center z-50 shadow-lg sticky top-0 lg:static justify-between p-5">
-    <h1 class="lg:text-4xl  font-[poppins] font-bold text-[#333333]  lg:pb-14">PREMKUMAR LANDE </h1>
-    <button id="Hamburger" class="fa-solid fa-bars lg:!hidden text-[#2E74B5]  text-3xl "></button>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Loader -->
+    <div class="loader">
+        <div class="loader-content"></div>
     </div>
-    <div id="menu" class="flex flex-col p-5 lg:hidden text-[#2E74B5] text-3xl gap-7 h-56 w-44 bg-white absolute right-[0px] font-normal"><a href="education.html" class="hover:text-[#81D4FA]">Education</a>
-                            <a href="Projects.html" class="">Projects</a>
-                            <a href="skills.html" class="">Skills</a>    
+
+    <!-- Navigation -->
+    <nav class="nav-menu">
+        <a href="#" class="nav-link active">Home</a>
+        <a href="Projects.html" class="nav-link">Projects</a>
+        <a href="skills.html" class="nav-link">Skills</a>
+        <a href="education.html" class="nav-link">Education</a>
+    </nav>
+
+    <!-- Social Links -->
+    <div class="social-links">
+        <a href="https://www.instagram.com/prem_kumar_324" class="social-link" target="_blank">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://github.com/premkumar324" class="social-link" target="_blank">
+            <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/premkumar-lande-2aa42219b" class="social-link" target="_blank">
+            <i class="fab fa-linkedin"></i>
+        </a>
     </div>
-    <div id="profileribbon" class="flex flex-col  mt-16 lg:mt-0  lg:flex-row pt-10 lg:pt-2 items-center justify-center p-[10px] shadow-[0_4px_8px_rgba(0,0,0,0.2)]" style="background-color: #7FA1C3;">
-        <div>
-            <a href="https://www.instagram.com/prem_kumar_324?igsh=aHN5MnZhZWtheTdv" class="flex items-center mr-[25px] ml[90px] no-underline ">
-                <img src="img/profilepic.png" id="profilepic" class=" h-64 lg:h-[262px] pl-4 mb-[20px]  lg:pl-16" />
-            </a>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="floating-shapes">
+            <div class="shape1"></div>
+            <div class="shape2"></div>
+            <div class="shape3"></div>
         </div>
-        <div id="ribbontext" class="w-[70%] hidden  lg:block text-[30px] leading-[1.5] text-pretty text-white text-center font-roboto "style="text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);">
-            Hi, I'm Premkumar!
-            I’m passionate about web development with expertise in HTML and CSS and Javascript and Tailwind framework. I’ve also honed my skills in data structures and algorithms. Dive into my portfolio to see my projects and get in touch if you'd like to collaborate!
+
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Hi, I'm Premkumar</h1>
+                <p>A passionate Frontend Developer crafting beautiful and functional web experiences. Specialized in React, Tailwind CSS, and modern web technologies.</p>
+                <div class="cta-buttons">
+                    <a href="Projects.html" class="btn btn-primary">
+                        View Projects
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#contact" class="btn btn-outline">
+                        Contact Me
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <lottie-player 
+                    src="https://lottie.host/2c247f49-c06f-463d-b7a0-6c469a1e05c0/uXBGZrXzEL.json"
+                    background="transparent"
+                    speed="1"
+                    loop
+                    autoplay>
+                </lottie-player>
+            </div>
         </div>
-        <div class="lg:w-[70%] lg:hidden text-xl leading-[1.5] text-pretty text-white text-center font-roboto "style="text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);">
-            Hi, I'm
+
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
         </div>
-        <div class="lg:w-[70%] text-4xl lg:hidden  leading-[1.5] text-pretty text-[#81D4FA] text-center font-roboto "style="text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);">
-            Premkumar Lande
-        </div>
-        <div class="lg:w-[70%] lg:hidden text-2xl leading-[1.5] text-pretty text-white text-center font-roboto "style="text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);">
-            FRONTEND DEVELOPER
-        </div>
-    </div>
-    <br>
-    <div id="content" class="pt-3 hidden lg:block lg:pt-16 pl-[10px]">
+    </section>
+
+    <script>
+        // Custom cursor
+        const cursor = document.querySelector('.cursor');
+        const follower = document.querySelector('.cursor-follower');
         
-        <ul id="indexlist" class="list-none gap-2 pl-5 lg:pl-16 flex flex-col lg:pt-7">
-            <li class=""><a href="education.html" class="text-[24px] bg-[#e2dad6] hover:scale-105 hover:border-[#6482AD]  transition-all duration-200 ease-in font-serif flex items-center pl-4 hover:shadow-[0_6px_12px_rgba(0,0,0,0.2)] hover:bg-[#6482AD]  border-4 border-[#e2dad6] shadow-[0_3px_3px_rgba(0,0,0,0.2)] rounded-3xl w-72 lg:w-[800px] h-[85px] ">Education</a></li>
-            <br><br>
-            <li><a href="Projects.html" class="text-[24px] bg-[#e2dad6] hover:scale-105 hover:border-[#6482AD] transition-all duration-200 ease-in font-serif flex items-center pl-4 hover:shadow-[0_6px_12px_rgba(0,0,0,0.2)] hover:bg-[#6482AD]  border-4 border-[#e2dad6] shadow-[0_3px_3px_rgba(0,0,0,0.2)] rounded-3xl w-72 lg:w-[800px] h-[85px] ">Projects</a></li>
-            <br><br>
-            <li><a href="skills.html" class="text-[24px] bg-[#e2dad6] hover:scale-105 hover:border-[#6482AD] transition-all duration-200 ease-in font-serif flex items-center pl-4 hover:shadow-[0_6px_12px_rgba(0,0,0,0.2)] hover:bg-[#6482AD]  border-4 border-[#e2dad6] shadow-[0_3px_3px_rgba(0,0,0,0.2)] rounded-3xl w-72 lg:w-[800px] h-[85px] ">Skills</a></li>
-        </ul>
-    </div>
-    <div id="info-mobile" class="text-[20px] lg:hidden py-10 text-center  px-10" >
-        <p>Dive into my portfolio to see my projects and get in touch if you'd like to collaborate!</p>
-    </div>
-    <div id="footer" class="lg:pl-[74px]  items-center mt-3 flex flex-col lg:block lg:mt-44">
-        <p class="text-2xl hidden lg:block ">Contact me on</p>
-        <div class="flex pt-2 lg:relative right-[10px] ">
-        <a href="https://www.instagram.com/prem_kumar_324?igsh=aHN5MnZhZWtheTdv" target="main" >
-            <img src="img/instaicon.png" alt="Instagram" class=" h-12  mx-2">
-        </a>
-        <a href="https://github.com/premkumar324" target="main">
-            <img src="img/githubicon.png" alt="Github" class="h-12  mx-2">
-        </a>
-        <a href="https://www.linkedin.com/in/premkumar-lande-2aa42219b" target="main" >
-            <img src="img/linkedinicon.png" alt="linkedin" class="h-12  mx-2">
-        </a>
-        </div>
-        <br>
-        <textarea id="feedback" placeholder="Plzz give your feedback" rows="5" class="border-2 border-blue-500 rounded-lg p-2 bg-gray-100 text-blue-400 w-4/5 max-w-2xl shadow-md resize-y"></textarea>
-        <br>
-        <input type="submit" value="submit" id="feedbackinput" class="bg-blue-500 text-white rounded-lg py-2 px-6 cursor-pointer hover:bg-blue-600 transition lg:absolute left-[74px] duration-300 ease-in-out">
-    </div>
-    
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            follower.style.left = e.clientX + 'px';
+            follower.style.top = e.clientY + 'px';
+        });
+
+        // Page loader
+        window.addEventListener('load', () => {
+            const loader = document.querySelector('.loader');
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                    
+                    // Animate hero content
+                    gsap.to('.hero-text h1', {
+                        opacity: 1,
+                        y: 0,
+                        duration: 1,
+                        delay: 0.2
+                    });
+                    
+                    gsap.to('.hero-text p', {
+                        opacity: 1,
+                        y: 0,
+                        duration: 1,
+                        delay: 0.4
+                    });
+                    
+                    gsap.to('.cta-buttons', {
+                        opacity: 1,
+                        y: 0,
+                        duration: 1,
+                        delay: 0.6
+                    });
+                    
+                    gsap.to('.hero-image', {
+                        opacity: 1,
+                        x: 0,
+                        duration: 1,
+                        delay: 0.8
+                    });
+                    
+                    gsap.to('.scroll-indicator', {
+                        opacity: 1,
+                        duration: 1,
+                        delay: 1
+                    });
+                }, 300);
+            }, 1500);
+        });
+
+        // Floating shapes animation
+        gsap.to('.shape1', {
+            x: 100,
+            y: 100,
+            rotation: 360,
+            duration: 20,
+            repeat: -1,
+            yoyo: true,
+            ease: 'none'
+        });
+
+        gsap.to('.shape2', {
+            x: -100,
+            y: -100,
+            rotation: -360,
+            duration: 25,
+            repeat: -1,
+            yoyo: true,
+            ease: 'none'
+        });
+
+        gsap.to('.shape3', {
+            x: 50,
+            y: -50,
+            rotation: 180,
+            duration: 15,
+            repeat: -1,
+            yoyo: true,
+            ease: 'none'
+        });
+
+        // Hover effects for buttons
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                gsap.to(cursor, {
+                    scale: 1.5,
+                    duration: 0.3
+                });
+            });
+            
+            button.addEventListener('mouseleave', () => {
+                gsap.to(cursor, {
+                    scale: 1,
+                    duration: 0.3
+                });
+            });
+        });
+    </script>
 </body>
-<script src="index.js"></script>
 </html>
 
