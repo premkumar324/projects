@@ -6,35 +6,158 @@
     <title>My Projects - Blog App</title>
     <link rel="stylesheet" href="style2.css">
     <link href="style.css" rel="stylesheet">
+    <script src="https://unpkg.com/framer-motion/dist/framer-motion.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(45deg, #2E74B5, #81D4FA);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .project-card {
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .shine {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shine::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 50%;
+            height: 200%;
+            background: linear-gradient(
+                to right,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(200%) rotate(45deg); }
+        }
+    </style>
 </head>
-<body class="bg-gray-100 p-5">
-    <h1 class="text-4xl font-bold text-[#2E74B5] mb-8">Projects</h1>
+<body class="min-h-screen bg-gradient-to-br from-gray-900 via-[#1a365d] to-[#0f172a] p-5 flex flex-col items-center justify-center">
+    <div class="text-center mb-12 floating">
+        <h1 class="text-6xl font-bold gradient-text mb-4">Projects</h1>
+        <p class="text-gray-300 text-xl">Showcasing My Latest Creation</p>
+    </div>
     
-    <div class="project-card bg-white rounded-lg shadow-lg p-6 max-w-2xl">
-        <h2 class="text-2xl font-bold text-[#333333] mb-4">Blog App with Appwrite</h2>
-        <p class="text-gray-700 mb-4">A modern blog application built with React and Appwrite backend, featuring user authentication, post creation, and management.</p>
-        
-        <div class="mb-4">
-            <h3 class="text-lg font-semibold mb-2">Key Features:</h3>
-            <ul class="list-disc pl-5 text-gray-700">
-                <li>User Authentication</li>
-                <li>Create, Edit, and Delete Posts</li>
-                <li>Rich Text Editor</li>
-                <li>Responsive Design</li>
-                <li>Real-time Updates</li>
-            </ul>
-        </div>
-        
-        <div class="flex gap-4">
-            <a href="https://blog-app-appwrite-beta.vercel.app/" target="_blank" 
-               class="bg-[#2E74B5] text-white px-6 py-2 rounded-lg hover:bg-[#81D4FA] transition duration-300">
-                View Live Demo
-            </a>
+    <div class="project-card glass-effect rounded-2xl p-8 max-w-4xl w-full mx-auto shine">
+        <div class="grid lg:grid-cols-2 gap-8">
+            <div class="space-y-6">
+                <h2 class="text-3xl font-bold text-white mb-4">Blog App with Appwrite</h2>
+                <p class="text-gray-300 text-lg">A modern, feature-rich blogging platform built with React and Appwrite backend. Experience seamless content creation and management with a beautiful, intuitive interface.</p>
+                
+                <div class="space-y-4">
+                    <h3 class="text-xl font-semibold text-white">Key Features:</h3>
+                    <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-center">
+                            <svg class="w-6 h-6 mr-2 text-[#81D4FA]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            User Authentication & Authorization
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-6 h-6 mr-2 text-[#81D4FA]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Rich Text Editor with Media Support
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-6 h-6 mr-2 text-[#81D4FA]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Real-time Updates & Notifications
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-6 h-6 mr-2 text-[#81D4FA]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Responsive & Adaptive Design
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="flex gap-4 pt-6">
+                    <a href="https://blog-app-appwrite-beta.vercel.app/" target="_blank" 
+                       class="bg-gradient-to-r from-[#2E74B5] to-[#81D4FA] text-white px-8 py-3 rounded-lg hover:scale-105 transition duration-300 flex items-center">
+                        <span>View Live Demo</span>
+                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="relative">
+                <lottie-player 
+                    src="https://lottie.host/2c247f49-c06f-463d-b7a0-6c469a1e05c0/uXBGZrXzEL.json"
+                    background="transparent"
+                    speed="1"
+                    loop
+                    autoplay>
+                </lottie-player>
+            </div>
         </div>
     </div>
 
-    <div class="mt-8">
-        <a href="index.html" class="text-[#2E74B5] hover:text-[#81D4FA] transition duration-300">← Back to Home</a>
+    <div class="mt-12">
+        <a href="index.html" 
+           class="text-gray-300 hover:text-white flex items-center transition duration-300 hover:scale-105">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to Home
+        </a>
     </div>
+
+    <script>
+        // Add smooth scroll reveal animation
+        window.addEventListener('DOMContentLoaded', (event) => {
+            const elements = document.querySelectorAll('.project-card, .floating');
+            elements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(50px)';
+                setTimeout(() => {
+                    element.style.transition = 'all 1s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, 200);
+            });
+        });
+    </script>
 </body>
 </html>
