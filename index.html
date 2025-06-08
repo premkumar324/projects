@@ -823,15 +823,31 @@
     </div>
 
     <div class="menu-overlay"></div>
-    <div class="hamburger">
-        <span></span>
-    </div>
+
+    <!-- Desktop Navigation -->
     <nav class="nav-menu">
-        <a href="#" class="nav-link active">Home</a>
+        <a href="index.html" class="nav-link active">Home</a>
         <a href="Projects.html" class="nav-link">Projects</a>
         <a href="skills.html" class="nav-link">Skills</a>
         <a href="education.html" class="nav-link">Education</a>
     </nav>
+
+    <!-- Hamburger Menu -->
+    <div class="hamburger-menu">
+        <i class="fas fa-bars hamburger-icon"></i>
+    </div>
+
+    <div class="mobile-nav">
+        <div class="mobile-nav-header">
+            <i class="fas fa-times close-menu"></i>
+        </div>
+        <div class="mobile-nav-links">
+            <a href="index.html" class="mobile-nav-link active">Home</a>
+            <a href="Projects.html" class="mobile-nav-link">Projects</a>
+            <a href="skills.html" class="mobile-nav-link">Skills</a>
+            <a href="education.html" class="mobile-nav-link">Education</a>
+        </div>
+    </div>
 
     <section class="hero">
         <div class="floating-shapes">
@@ -1017,8 +1033,8 @@
         });
 
         // Hamburger menu functionality
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
+        const hamburger = document.querySelector('.hamburger-menu');
+        const navMenu = document.querySelector('.mobile-nav');
         const menuOverlay = document.querySelector('.menu-overlay');
         const body = document.body;
 
@@ -1038,7 +1054,7 @@
         });
 
         // Close menu when clicking a nav link
-        document.querySelectorAll('.nav-link').forEach(link => {
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
             link.addEventListener('click', () => {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');

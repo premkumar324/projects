@@ -278,6 +278,160 @@
             .shape:nth-child(2) { width: 100px; height: 100px; }
             .shape:nth-child(3) { width: 80px; height: 80px; }
         }
+
+        .cursor-follower {
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 999;
+            transition: all 0.2s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .nav-menu {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 100;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 50px;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-link {
+            color: var(--light);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+        }
+
+        /* Mobile Navigation */
+        .hamburger-menu {
+            display: none;
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hamburger-icon {
+            color: var(--light);
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hamburger-menu {
+                display: flex;
+            }
+        }
+
+        /* Mobile Navigation Menu */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100vh;
+            background: rgba(26, 26, 26, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 999;
+            transition: right 0.3s ease;
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-nav.active {
+            right: 0;
+        }
+
+        .mobile-nav-header {
+            padding: 2rem;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .close-menu {
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-menu:hover {
+            color: var(--primary);
+        }
+
+        .mobile-nav-links {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .mobile-nav-link {
+            color: var(--light);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateX(20px);
+        }
+
+        .mobile-nav.active .mobile-nav-link {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .mobile-nav-link:nth-child(1) { transition-delay: 0.1s; }
+        .mobile-nav-link:nth-child(2) { transition-delay: 0.2s; }
+        .mobile-nav-link:nth-child(3) { transition-delay: 0.3s; }
+        .mobile-nav-link:nth-child(4) { transition-delay: 0.4s; }
+
+        .mobile-nav-link:hover, .mobile-nav-link.active {
+            color: var(--primary);
+            transform: translateX(10px);
+        }
+
+        /* Add overlay for mobile menu */
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
     </style>
 </head>
 <body>
@@ -299,6 +453,24 @@
         <a href="skills.html" class="nav-link active">Skills</a>
         <a href="education.html" class="nav-link">Education</a>
     </nav>
+
+    <!-- Hamburger Menu -->
+    <div class="hamburger-menu">
+        <i class="fas fa-bars hamburger-icon"></i>
+    </div>
+
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-nav">
+        <div class="mobile-nav-header">
+            <i class="fas fa-times close-menu"></i>
+        </div>
+        <div class="mobile-nav-links">
+            <a href="index.html" class="mobile-nav-link">Home</a>
+            <a href="Projects.html" class="mobile-nav-link">Projects</a>
+            <a href="skills.html" class="mobile-nav-link active">Skills</a>
+            <a href="education.html" class="mobile-nav-link">Education</a>
+        </div>
+    </div>
 
     <div class="skills-container">
         <h1 class="section-title">Technical Skills</h1>
@@ -430,6 +602,31 @@
             cursorFollower.style.top = e.clientY + 'px';
         });
 
+        // Mobile Navigation
+        const hamburgerMenu = document.querySelector('.hamburger-menu');
+        const mobileNav = document.querySelector('.mobile-nav');
+        const closeMenu = document.querySelector('.close-menu');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+        const overlay = document.createElement('div');
+        overlay.classList.add('mobile-nav-overlay');
+        document.body.appendChild(overlay);
+
+        function toggleMobileNav() {
+            mobileNav.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+        }
+
+        hamburgerMenu.addEventListener('click', toggleMobileNav);
+        closeMenu.addEventListener('click', toggleMobileNav);
+        overlay.addEventListener('click', toggleMobileNav);
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                toggleMobileNav();
+            });
+        });
+
         // GSAP Animations
         gsap.registerPlugin(ScrollTrigger);
 
@@ -459,7 +656,7 @@
         });
 
         // Hover effects
-        document.querySelectorAll('.skill-card, .nav-link').forEach(element => {
+        document.querySelectorAll('.skill-card').forEach(element => {
             element.addEventListener('mouseenter', () => {
                 gsap.to(cursor, {
                     scale: 1.5,

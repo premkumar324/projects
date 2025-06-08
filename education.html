@@ -390,9 +390,104 @@
                 padding: 1.5rem;
             }
         }
+
+        .cursor-follower {
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 999;
+            transition: all 0.2s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Navigation Styles */
+        .nav-menu {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 100;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 50px;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-link {
+            color: var(--light);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+        }
+
+        /* Mobile Navigation */
+        .hamburger-menu {
+            display: none;
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hamburger-icon {
+            color: var(--light);
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hamburger-menu {
+                display: flex;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="Projects.html" class="nav-link">Projects</a>
+        <a href="skills.html" class="nav-link">Skills</a>
+        <a href="education.html" class="nav-link active">Education</a>
+    </nav>
+
+    <!-- Hamburger Menu -->
+    <div class="hamburger-menu">
+        <i class="fas fa-bars hamburger-icon"></i>
+    </div>
+
+    <div class="mobile-nav">
+        <div class="mobile-nav-header">
+            <i class="fas fa-times close-menu"></i>
+        </div>
+        <div class="mobile-nav-links">
+            <a href="index.html" class="mobile-nav-link">Home</a>
+            <a href="Projects.html" class="mobile-nav-link">Projects</a>
+            <a href="skills.html" class="mobile-nav-link">Skills</a>
+            <a href="education.html" class="mobile-nav-link active">Education</a>
+        </div>
+    </div>
+
     <!-- Custom Cursor -->
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
@@ -403,14 +498,6 @@
         <div class="shape"></div>
         <div class="shape"></div>
     </div>
-
-    <!-- Navigation -->
-    <nav class="nav-menu">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="Projects.html" class="nav-link">Projects</a>
-        <a href="skills.html" class="nav-link">Skills</a>
-        <a href="education.html" class="nav-link active">Education</a>
-    </nav>
 
     <div class="education-container">
         <h1 class="section-title">Education Journey</h1>
@@ -471,12 +558,44 @@
         const cursor = document.querySelector('.cursor');
         const cursorFollower = document.querySelector('.cursor-follower');
 
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            cursorFollower.style.left = e.clientX + 'px';
-            cursorFollower.style.top = e.clientY + 'px';
-        });
+        if (cursor && cursorFollower) {
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            });
+        }
+
+        // Mobile Navigation
+        const hamburgerMenu = document.querySelector('.hamburger-menu');
+        const mobileNav = document.querySelector('.mobile-nav');
+        const closeMenu = document.querySelector('.close-menu');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        if (hamburgerMenu && mobileNav && closeMenu) {
+            const overlay = document.createElement('div');
+            overlay.classList.add('mobile-nav-overlay');
+            document.body.appendChild(overlay);
+
+            function toggleMobileNav() {
+                mobileNav.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+            }
+
+            hamburgerMenu.addEventListener('click', toggleMobileNav);
+            closeMenu.addEventListener('click', toggleMobileNav);
+            overlay.addEventListener('click', toggleMobileNav);
+
+            if (mobileNavLinks.length > 0) {
+                mobileNavLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        toggleMobileNav();
+                    });
+                });
+            }
+        }
 
         // GSAP Animations
         gsap.registerPlugin(ScrollTrigger);
@@ -518,19 +637,23 @@
         });
 
         // Hover effects
-        document.querySelectorAll('.timeline-content, .grade-card, .nav-link').forEach(element => {
+        document.querySelectorAll('.timeline-content, .grade-card').forEach(element => {
             element.addEventListener('mouseenter', () => {
-                gsap.to(cursor, {
-                    scale: 1.5,
-                    duration: 0.3
-                });
+                if (cursor) {
+                    gsap.to(cursor, {
+                        scale: 1.5,
+                        duration: 0.3
+                    });
+                }
             });
             
             element.addEventListener('mouseleave', () => {
-                gsap.to(cursor, {
-                    scale: 1,
-                    duration: 0.3
-                });
+                if (cursor) {
+                    gsap.to(cursor, {
+                        scale: 1,
+                        duration: 0.3
+                    });
+                }
             });
         });
     </script>
