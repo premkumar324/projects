@@ -23,6 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initialize back to top button
     initBackToTop();
+    
+    // Initialize connect button for mobile
+    initConnectButton();
 });
 
 // Initialize animations with GSAP
@@ -191,6 +194,8 @@ function initMobileNav() {
     const hamburgerMenu = document.querySelector('.hamburger-menu');
     const mobileNav = document.querySelector('.mobile-nav');
     const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+    const mobileNavConnectBtn = document.getElementById('mobileNavConnectBtn');
+    const circularMenu = document.querySelector('.circular-menu');
     
     if (hamburgerMenu && mobileNav) {
         // Create overlay if it doesn't exist
@@ -216,6 +221,26 @@ function initMobileNav() {
                 link.addEventListener('click', () => {
                     toggleMobileNav();
                 });
+            });
+        }
+        
+        // Handle mobile nav connect button
+        if (mobileNavConnectBtn && circularMenu) {
+            mobileNavConnectBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                toggleMobileNav(); // Close the mobile menu
+                
+                // Show the circular menu with a slight delay to allow the mobile menu to close
+                setTimeout(() => {
+                    circularMenu.classList.add('active');
+                    
+                    // Auto-hide after 5 seconds if not interacted with
+                    setTimeout(() => {
+                        if (!circularMenu.querySelector('.menu-item:hover')) {
+                            circularMenu.classList.remove('active');
+                        }
+                    }, 5000);
+                }, 300);
             });
         }
     }
@@ -305,6 +330,36 @@ function initBackToTop() {
                 top: 0,
                 behavior: 'smooth'
             });
+        });
+    }
+}
+
+// Initialize connect button functionality
+function initConnectButton() {
+    const connectBtn = document.getElementById('connectBtn');
+    const circularMenu = document.querySelector('.circular-menu');
+    
+    if (connectBtn && circularMenu) {
+        connectBtn.addEventListener('click', () => {
+            circularMenu.classList.toggle('active');
+            
+            // Auto-hide after 5 seconds if not interacted with
+            if (circularMenu.classList.contains('active')) {
+                setTimeout(() => {
+                    if (!circularMenu.querySelector('.menu-item:hover')) {
+                        circularMenu.classList.remove('active');
+                    }
+                }, 5000);
+            }
+        });
+        
+        // Close circular menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (circularMenu.classList.contains('active') && 
+                !circularMenu.contains(e.target) && 
+                e.target !== connectBtn) {
+                circularMenu.classList.remove('active');
+            }
         });
     }
 }
