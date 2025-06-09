@@ -149,9 +149,23 @@ function initSmoothScrolling() {
                     document.body.style.overflow = '';
                 }
                 
-                // Smooth scroll to the section
+                // Get the section title to position it at the top
+                const sectionTitle = targetSection.querySelector('.section-title');
+                const navHeight = 80; // Approximate navbar height
+                let scrollPosition;
+                
+                if (sectionTitle) {
+                    // Calculate position to place the section title at the top with some padding
+                    const titleOffset = sectionTitle.getBoundingClientRect().top;
+                    scrollPosition = window.pageYOffset + titleOffset - navHeight;
+                } else {
+                    // Fallback to section top if title not found
+                    scrollPosition = targetSection.offsetTop;
+                }
+                
+                // Smooth scroll to the calculated position
                 window.scrollTo({
-                    top: targetSection.offsetTop,
+                    top: scrollPosition,
                     behavior: 'smooth'
                 });
                 
