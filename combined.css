@@ -511,6 +511,48 @@ section {
     box-shadow: 0 5px 15px rgba(129, 212, 250, 0.3);
 }
 
+/* Container styles */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 8rem 2rem 2rem;
+}
+
+/* Projects, Skills, Education Container */
+.projects-container, 
+.skills-container, 
+.education-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 8rem 2rem 2rem;
+}
+
+/* Project filters */
+.project-filters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.filter-btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    background: rgba(255,255,255,0.1);
+    color: var(--light);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    backdrop-filter: blur(10px);
+}
+
+.filter-btn.active, .filter-btn:hover {
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    transform: translateY(-2px);
+}
+
 /* Projects Section Styles */
 .projects-grid {
     display: grid;
@@ -559,7 +601,7 @@ section {
 
 .project-image {
     width: 100%;
-    height: 400px;
+    height: 250px;
     border-radius: 15px;
     overflow: hidden;
     margin-bottom: 1.5rem;
@@ -682,42 +724,45 @@ section {
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
-.project-preview {
-    margin-top: 2rem;
-    border-radius: 10px;
+.project-details {
+    max-height: 0;
     overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    transform: translateY(20px);
+    transition: max-height 0.5s ease-in-out;
     opacity: 0;
-    position: relative;
-    aspect-ratio: 16/9;
-    background: rgba(255,255,255,0.05);
 }
 
-.project-preview img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.project-details.active {
+    max-height: 2000px;
+    opacity: 1;
+    margin-top: 2rem;
+}
+
+.view-details-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: 1px solid var(--primary);
+    color: var(--light);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.view-details-btn:hover {
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    border-color: transparent;
+}
+
+.view-details-btn i {
     transition: transform 0.3s ease;
 }
 
-.project-preview:hover img {
-    transform: scale(1.05);
-}
-
-.project-preview::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-        to bottom,
-        transparent 0%,
-        rgba(0,0,0,0.2) 100%
-    );
-    pointer-events: none;
+.view-details-btn.active i {
+    transform: rotate(180deg);
 }
 
 .project-screenshots {
@@ -796,47 +841,6 @@ section {
     -webkit-text-fill-color: transparent;
 }
 
-.project-details {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease-in-out;
-    opacity: 0;
-}
-
-.project-details.active {
-    max-height: 2000px;
-    opacity: 1;
-    margin-top: 2rem;
-}
-
-.view-details-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 1rem;
-    padding: 0.5rem 1rem;
-    background: transparent;
-    border: 1px solid var(--primary);
-    color: var(--light);
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
-}
-
-.view-details-btn:hover {
-    background: linear-gradient(45deg, var(--primary), var(--secondary));
-    border-color: transparent;
-}
-
-.view-details-btn i {
-    transition: transform 0.3s ease;
-}
-
-.view-details-btn.active i {
-    transform: rotate(180deg);
-}
-
 .feature-list {
     margin: 2rem 0;
     display: grid;
@@ -883,132 +887,593 @@ section {
     padding-bottom: 0.5rem;
 }
 
-.workflow-steps {
-    margin: 2rem 0;
-    display: flex;
-    flex-direction: column;
+/* Skills Section Styles */
+.skill-category {
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    transform: translateY(30px);
+    opacity: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-category::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.1),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.skill-category:hover::before {
+    left: 100%;
+}
+
+.category-title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.5rem;
 }
 
-.workflow-step {
+.skill-card {
+    background: rgba(255,255,255,0.03);
+    border-radius: 15px;
+    padding: 2rem;
     display: flex;
-    gap: 1rem;
-    align-items: flex-start;
+    align-items: center;
+    gap: 1.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.05);
 }
 
-.step-number {
-    background: linear-gradient(45deg, var(--primary), var(--secondary));
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
+.skill-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        125deg,
+        transparent 0%,
+        transparent 40%,
+        rgba(255,255,255,0.1) 50%,
+        transparent 60%,
+        transparent 100%
+    );
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.skill-card:hover::after {
+    transform: translateX(100%);
+}
+
+.skill-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    background: rgba(255,255,255,0.05);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.skill-icon {
+    width: 60px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
-}
-
-.step-content h4 {
+    font-size: 2rem;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    border-radius: 15px;
     color: var(--light);
-    margin-bottom: 0.5rem;
+    position: relative;
+    overflow: hidden;
 }
 
-.step-content p {
+.skill-icon::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2));
+    top: -50%;
+    left: -50%;
+    transform: rotate(45deg);
+    transition: all 0.3s ease;
+}
+
+.skill-card:hover .skill-icon::before {
+    top: 100%;
+    left: 100%;
+}
+
+.skill-info {
+    flex: 1;
+}
+
+.skill-info h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+}
+
+.skill-info p {
     color: #ccc;
     font-size: 0.9rem;
-    line-height: 1.6;
+    margin-bottom: 1rem;
 }
 
-@media (max-width: 768px) {
-    .projects-container {
-        padding: 6rem 1rem 2rem;
-    }
-
-    .project-filters {
-        gap: 0.8rem;
-        margin-bottom: 2rem;
-    }
-
-    .filter-btn {
-        padding: 0.6rem 1.2rem;
-        font-size: 0.8rem;
-    }
-
-    .projects-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-
-    .project-card {
-        padding: 1.5rem;
-    }
-
-    .project-image {
-        height: 200px;
-        margin-bottom: 1.2rem;
-    }
-
-    .project-title {
-        font-size: 1.4rem;
-        margin-bottom: 0.8rem;
-    }
-
-    .project-description {
-        font-size: 0.9rem;
-        margin-bottom: 1.2rem;
-    }
-
-    .project-tech {
-        gap: 0.5rem;
-        margin-bottom: 1.2rem;
-    }
-
-    .tech-tag {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.8rem;
-    }
-
-    .project-links {
-        gap: 1rem;
-    }
-
-    .project-link {
-        padding: 0.6rem 1rem;
-        font-size: 0.9rem;
-    }
-
-    .project-link i {
-        font-size: 1rem;
-    }
-
-    .screenshot {
-        margin-bottom: 1.2rem;
-    }
-
-    .mobile-showcase {
-        flex-direction: column;
-        gap: 1.5rem;
-        margin-top: 2rem;
-    }
-
-    .mobile-frame {
-        width: 220px;
-        padding: 10px;
-        border-radius: 25px;
-    }
-
-    .mobile-screen {
-        height: 400px;
-    }
+.proficiency-bar {
+    height: 6px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
 }
 
-@media (max-width: 480px) {
-    .project-filters {
-        flex-wrap: wrap;
-    }
+.proficiency-level {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 3px;
+    position: relative;
+    width: 0;
+    transition: width 1.5s ease;
+}
+
+.proficiency-level::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    animation: shimmer 2s infinite;
+    transform: translateX(-100%);
+}
+
+@keyframes shimmer {
+    100% { transform: translateX(100%); }
+}
+
+/* Education Section Styles */
+.timeline {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, 
+        var(--primary), 
+        var(--secondary),
+        var(--primary),
+        var(--secondary));
+    background-size: 400% 400%;
+    animation: gradientFlow 10s ease infinite;
+    border-radius: 2px;
+}
+
+@keyframes gradientFlow {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 0% 100%; }
+    100% { background-position: 0% 0%; }
+}
+
+.timeline-item {
+    margin-bottom: 3rem;
+    position: relative;
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+.timeline-item:nth-child(odd) {
+    padding-right: calc(50% + 2rem);
+}
+
+.timeline-item:nth-child(even) {
+    padding-left: calc(50% + 2rem);
+}
+
+.timeline-content {
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+}
+
+.timeline-content::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: var(--primary);
+    border-radius: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    animation: pulse 2s infinite;
+}
+
+.timeline-item:nth-child(odd) .timeline-content::before {
+    right: -3.25rem;
+}
+
+.timeline-item:nth-child(even) .timeline-content::before {
+    left: -3.25rem;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(46, 116, 181, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(46, 116, 181, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(46, 116, 181, 0); }
+}
+
+.timeline-content::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        125deg,
+        transparent 0%,
+        transparent 40%,
+        rgba(255,255,255,0.1) 50%,
+        transparent 60%,
+        transparent 100%
+    );
+    border-radius: 20px;
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.timeline-content:hover::after {
+    transform: translateX(100%);
+}
+
+.timeline-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.timeline-year {
+    display: inline-block;
+    background: var(--primary);
+    color: var(--light);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 5px 15px rgba(46, 116, 181, 0.3);
+}
+
+.timeline-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+}
+
+.timeline-subtitle {
+    color: #ccc;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.timeline-grade {
+    display: inline-block;
+    background: rgba(255,255,255,0.05);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    color: var(--secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.timeline-content:hover .timeline-grade {
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    color: var(--light);
+}
+
+.performance-table {
+    margin-top: 3rem;
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    transform: translateY(30px);
+    opacity: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.performance-table::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.1),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.performance-table:hover::before {
+    left: 100%;
+}
+
+.performance-table h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+}
+
+.performance-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.grade-card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 15px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.grade-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        125deg,
+        transparent 0%,
+        transparent 40%,
+        rgba(255,255,255,0.1) 50%,
+        transparent 60%,
+        transparent 100%
+    );
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.grade-card:hover::after {
+    transform: translateX(100%);
+}
+
+.grade-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.grade-title {
+    color: #ccc;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.grade-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    display: inline-block;
+}
+
+.grade-value::after {
+    content: attr(data-subject);
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    color: var(--secondary);
+    white-space: nowrap;
+    font-weight: 400;
+    letter-spacing: 1px;
 }
 
 /* Media Queries */
 @media (max-width: 768px) {
+    .projects-container, .skills-container, .education-container {
+        padding: 6rem 1rem 2rem;
+    }
+    
+    .section-title {
+        font-size: 2.2rem;
+        text-align: center;
+        opacity: 1;
+        transform: none;
+    }
+    
+    .project-filters {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .filter-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.8rem;
+    }
+    
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .project-card {
+        padding: 1.5rem;
+    }
+    
+    .project-image {
+        height: 200px;
+    }
+    
+    .project-title {
+        font-size: 1.4rem;
+    }
+    
+    .project-description {
+        font-size: 0.9rem;
+    }
+    
+    .timeline::before {
+        left: 20px;
+    }
+    
+    .timeline-item {
+        width: 100%;
+        padding-left: 50px !important;
+        padding-right: 0 !important;
+    }
+    
+    .timeline-content::before {
+        left: -30px !important;
+    }
+    
+    .performance-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .timeline-title {
+        font-size: 1.3rem;
+    }
+    
+    .timeline-subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .timeline-year {
+        font-size: 0.8rem;
+    }
+    
+    .timeline-grade {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+    }
+    
+    .grade-value {
+        font-size: 2rem;
+    }
+    
+    .grade-title {
+        font-size: 0.8rem;
+    }
+    
+    .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .skill-category {
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .category-title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+    
+    .skill-card {
+        padding: 1.5rem;
+    }
+    
+    .skill-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+    
+    .skill-info h3 {
+        font-size: 1.1rem;
+    }
+    
+    .skill-info p {
+        font-size: 0.8rem;
+    }
+    
+    .proficiency-bar {
+        height: 5px;
+    }
+    
+    .mobile-showcase {
+        flex-direction: column;
+    }
+    
+    .mobile-frame {
+        width: 220px;
+    }
+    
+    .mobile-description {
+        text-align: center;
+    }
+    
+    .project-screenshots {
+        grid-template-columns: 1fr;
+    }
+
     .nav-menu {
         display: none;
     }
@@ -1229,46 +1694,6 @@ section {
     .circular-menu .menu-item i {
         font-size: 1.2rem;
     }
-
-    #connectBtn {
-        background: var(--primary);
-        color: white;
-        border: none;
-    }
-
-    #connectBtn:hover {
-        background: var(--secondary);
-    }
-
-    .section-title {
-        font-size: 2.2rem;
-    }
-
-    .projects-container, 
-    .skills-container, 
-    .education-container {
-        padding-top: 6rem;
-    }
-
-    .project-filters {
-        gap: 0.5rem;
-    }
-
-    .filter-btn {
-        padding: 0.6rem 1rem;
-        font-size: 0.8rem;
-    }
-
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .back-to-top {
-        bottom: 70px;
-        right: 20px;
-        width: 40px;
-        height: 40px;
-    }
 }
 
 @media (min-width: 769px) {
@@ -1289,71 +1714,4 @@ section {
     .mobile-only {
         display: none !important;
     }
-}
-
-/* Container styles */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 8rem 2rem 2rem;
-}
-
-/* Project filters */
-.project-filters {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 3rem;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.filter-btn {
-    padding: 0.8rem 1.5rem;
-    border: none;
-    background: rgba(255,255,255,0.1);
-    color: var(--light);
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
-    backdrop-filter: blur(10px);
-}
-
-.filter-btn.active, .filter-btn:hover {
-    background: linear-gradient(45deg, var(--primary), var(--secondary));
-    transform: translateY(-2px);
-}
-
-/* Projects Section */
-.projects-container, 
-.skills-container, 
-.education-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 8rem 2rem 2rem;
-}
-
-.project-filters {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 3rem;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.filter-btn {
-    padding: 0.8rem 1.5rem;
-    border: none;
-    background: rgba(255,255,255,0.1);
-    color: var(--light);
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
-    backdrop-filter: blur(10px);
-}
-
-.filter-btn.active, .filter-btn:hover {
-    background: linear-gradient(45deg, var(--primary), var(--secondary));
-    transform: translateY(-2px);
-}
+} 
