@@ -317,8 +317,8 @@ section {
 /* Back to top button */
 .back-to-top {
     position: fixed;
-    bottom: 2rem;
-    right: 8rem;
+    bottom: 7rem;
+    right: 2rem;
     background: var(--gradient);
     width: 50px;
     height: 50px;
@@ -331,7 +331,7 @@ section {
     opacity: 0;
     transition: var(--transition-standard);
     transform: translateY(100px);
-    z-index: 100;
+    z-index: 99;
 }
 
 .back-to-top.visible {
@@ -875,65 +875,70 @@ section {
     color: #ccc;
 }
 
-/* Skills Section */
+/* Skills Section - Redesigned for aesthetics */
+.skills-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 8rem 2rem 4rem;
+}
+
 .skill-category {
     background: var(--glass-bg);
     backdrop-filter: blur(10px);
     border-radius: var(--card-border-radius);
     padding: 2rem;
-    margin-bottom: 3rem;
+    margin-bottom: 3.5rem;
     border: 1px solid var(--glass-border);
     transform: translateY(30px);
     opacity: 0;
     position: relative;
     overflow: hidden;
-}
-
-.skill-category::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,0.1),
-        transparent
-    );
-    transition: 0.5s;
-}
-
-.skill-category:hover::before {
-    left: 100%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
 .category-title {
     font-size: 1.8rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     background: var(--gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    text-align: center;
+    position: relative;
+    padding-bottom: 0.8rem;
+}
+
+.category-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: var(--gradient);
+    border-radius: 3px;
 }
 
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
 .skill-card {
     background: rgba(255,255,255,0.03);
     border-radius: 15px;
-    padding: 2rem;
+    padding: 1.5rem;
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1.2rem;
     transition: var(--transition-standard);
     position: relative;
     overflow: hidden;
     border: 1px solid var(--glass-border);
+    height: 100%;
 }
 
 .skill-card::after {
@@ -963,56 +968,47 @@ section {
     transform: translateY(-5px) scale(1.02);
     background: var(--glass-hover);
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    z-index: 2;
 }
 
 .skill-icon {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
+    min-width: 50px; /* Prevent icon from shrinking */
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2rem;
+    font-size: 1.5rem;
     background: var(--gradient);
-    border-radius: 15px;
+    border-radius: 12px;
     color: var(--light);
     position: relative;
     overflow: hidden;
-}
-
-.skill-icon::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2));
-    top: -50%;
-    left: -50%;
-    transform: rotate(45deg);
-    transition: var(--transition-standard);
-}
-
-.skill-card:hover .skill-icon::before {
-    top: 100%;
-    left: 100%;
+    box-shadow: 0 5px 15px rgba(46, 116, 181, 0.3);
 }
 
 .skill-info {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .skill-info h3 {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
     background: var(--gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
 .skill-info p {
     color: #ccc;
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
+    font-size: 0.85rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.4;
 }
 
 .proficiency-bar {
@@ -1021,6 +1017,7 @@ section {
     border-radius: 3px;
     overflow: hidden;
     position: relative;
+    margin-top: auto;
 }
 
 .proficiency-level {
@@ -1042,6 +1039,31 @@ section {
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
     animation: shimmer 2s infinite;
     transform: translateX(-100%);
+}
+
+/* Add responsive adjustments */
+@media (max-width: 992px) {
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .skill-category {
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .category-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
 }
 
 /* Education Section */
@@ -1140,23 +1162,24 @@ section {
     .timeline-marker {
         width: 20px;
         height: 20px;
-        top: 50%;
         z-index: 5;
         background: var(--primary);
         border: 3px solid var(--light);
         box-shadow: 0 0 0 4px rgba(46, 116, 181, 0.3);
         position: absolute;
+        border-radius: 50%;
+        top: 15px;
     }
     
     /* Position markers for left and right cards */
     .timeline-item:nth-child(odd) .timeline-marker {
-        right: -13px;
-        transform: translateY(-50%);
+        right: 15px;
+        transform: translateY(0);
     }
     
     .timeline-item:nth-child(even) .timeline-marker {
-        left: -13px;
-        transform: translateY(-50%);
+        left: 15px;
+        transform: translateY(0);
     }
     
     /* Clear the floats */
@@ -1186,26 +1209,25 @@ section {
     overflow: hidden;
 }
 
-/* Timeline marker dot */
+/* Timeline marker dot - OUTSIDE MEDIA QUERY */
 .timeline-marker {
     content: '';
     position: absolute;
-    top: 50%;
     width: 1.5rem;
     height: 1.5rem;
     background: var(--primary);
     border-radius: 50%;
-    transform: translateY(-50%);
-    z-index: 2;
+    z-index: 10;
     animation: pulse 2s infinite;
+    top: 15px;
 }
 
 .timeline-item:nth-child(odd) .timeline-marker {
-    right: -3.25rem;
+    right: 15px;
 }
 
 .timeline-item:nth-child(even) .timeline-marker {
-    left: -3.25rem;
+    left: 15px;
 }
 
 /* Add shine effect to timeline cards */
