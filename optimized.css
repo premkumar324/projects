@@ -49,30 +49,7 @@ section {
     overflow: hidden;
 }
 
-/* Custom Cursor */
-.cursor {
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--secondary);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 999;
-    transition: all 0.1s ease;
-    transform: translate(-50%, -50%);
-}
 
-.cursor-follower {
-    width: 8px;
-    height: 8px;
-    background: var(--primary);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 999;
-    transition: all 0.2s ease;
-    transform: translate(-50%, -50%);
-}
 
 /* Loader */
 .loader {
@@ -1663,9 +1640,10 @@ section {
     }
     
     .performance-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-    
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+}
+
     .timeline-title {
         font-size: 1.3rem;
     }
@@ -1688,7 +1666,7 @@ section {
     }
     
     .grade-title {
-        font-size: 0.8rem;
+        font-size: 1rem;
     }
     
     /* Skills Section */
