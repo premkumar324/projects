@@ -26,6 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initialize connect button for mobile
     initConnectButton();
+
+    // Initialize skill bars animation
+    initSkillBars();
 });
 
 // Initialize animations with GSAP
@@ -460,4 +463,28 @@ window.addEventListener('scroll', () => {
             }
         });
     }
-}); 
+});
+
+// Initialize skill bars animation
+function initSkillBars() {
+    const skillCards = document.querySelectorAll('.skill-card');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate');
+                // Optional: Stop observing after animation
+                // observer.unobserve(entry.target);
+            } else {
+                // Optional: Remove animation when out of view for replay
+                entry.target.classList.remove('animate');
+            }
+        });
+    }, {
+        threshold: 0.2 // Start animation when 20% of the card is visible
+    });
+    
+    skillCards.forEach(card => {
+        observer.observe(card);
+    });
+} 
