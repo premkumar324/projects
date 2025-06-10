@@ -143,40 +143,38 @@ function initSmoothScrolling() {
                 // Close mobile menu if it's open
                 const mobileNav = document.querySelector('.mobile-nav');
                 const hamburgerMenu = document.querySelector('.hamburger-menu');
-                const overlay = document.querySelector('.mobile-nav-overlay');
+                const menuOverlay = document.querySelector('.menu-overlay');
                 
                 if (mobileNav && mobileNav.classList.contains('active')) {
                     mobileNav.classList.remove('active');
                     hamburgerMenu.classList.remove('active');
-                    overlay.classList.remove('active');
-                    document.body.style.overflow = '';
+                    menuOverlay.classList.remove('active');
+                    document.body.classList.remove('no-scroll');
                 }
                 
-                // Get the section title to position it at the top
-                const sectionTitle = targetSection.querySelector('.section-title');
+                // Find the section heading
+                const sectionHeading = targetSection.querySelector('.section-title');
                 const navHeight = 80; // Approximate navbar height
-                let scrollPosition;
+                let targetPosition;
                 
-                if (sectionTitle) {
-                    // Calculate position to place the section title at the top with some padding
-                    const titleOffset = sectionTitle.getBoundingClientRect().top;
-                    scrollPosition = window.pageYOffset + titleOffset - navHeight;
+                if (sectionHeading) {
+                    // Calculate position to place the heading at the top with navbar offset
+                    const headingRect = sectionHeading.getBoundingClientRect();
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    targetPosition = scrollTop + headingRect.top - navHeight - 20; // Added 20px padding
                 } else {
-                    // Fallback to section top if title not found
-                    scrollPosition = targetSection.offsetTop;
+                    // Fallback to section top if no heading found
+                    targetPosition = targetSection.offsetTop - navHeight;
                 }
                 
                 // Smooth scroll to the calculated position
                 window.scrollTo({
-                    top: scrollPosition,
+                    top: targetPosition,
                     behavior: 'smooth'
                 });
                 
                 // Update active link
-                document.querySelectorAll('.nav-link').forEach(navLink => {
-                    navLink.classList.remove('active');
-                });
-                document.querySelectorAll('.mobile-nav-link').forEach(navLink => {
+                document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(navLink => {
                     navLink.classList.remove('active');
                 });
                 
@@ -193,56 +191,33 @@ function initSmoothScrolling() {
 function initMobileNav() {
     const hamburgerMenu = document.querySelector('.hamburger-menu');
     const mobileNav = document.querySelector('.mobile-nav');
+    const menuOverlay = document.querySelector('.menu-overlay');
     const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-    const mobileNavConnectBtn = document.getElementById('mobileNavConnectBtn');
     const circularMenu = document.querySelector('.circular-menu');
+    const floatingConnect = document.querySelector('.floating-connect');
+    const backToTop = document.querySelector('.back-to-top');
     
-    if (hamburgerMenu && mobileNav) {
-        // Create overlay if it doesn't exist
-        let overlay = document.querySelector('.mobile-nav-overlay');
-        if (!overlay) {
-            overlay = document.createElement('div');
-            overlay.classList.add('mobile-nav-overlay');
-            document.body.appendChild(overlay);
-        }
-        
+    if (hamburgerMenu && mobileNav && menuOverlay) {
         function toggleMobileNav() {
-            mobileNav.classList.toggle('active');
+            const isOpening = !mobileNav.classList.contains('active');
+            
             hamburgerMenu.classList.toggle('active');
-            overlay.classList.toggle('active');
-            document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+            mobileNav.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            document.body.classList.toggle('no-scroll');
+
+            // If opening mobile nav, close circular menu if it's open
+            if (isOpening && circularMenu && circularMenu.classList.contains('active')) {
+                circularMenu.classList.remove('active');
+                if (floatingConnect) floatingConnect.classList.remove('fade');
+                if (backToTop) backToTop.classList.remove('fade');
+            }
         }
         
         hamburgerMenu.addEventListener('click', toggleMobileNav);
-        overlay.addEventListener('click', toggleMobileNav);
+        menuOverlay.addEventListener('click', toggleMobileNav);
         
-        if (mobileNavLinks.length > 0) {
-            mobileNavLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    toggleMobileNav();
-                });
-            });
-        }
-        
-        // Handle mobile nav connect button
-        if (mobileNavConnectBtn && circularMenu) {
-            mobileNavConnectBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                toggleMobileNav(); // Close the mobile menu
-                
-                // Show the circular menu with a slight delay to allow the mobile menu to close
-                setTimeout(() => {
-                    circularMenu.classList.add('active');
-                    
-                    // Auto-hide after 5 seconds if not interacted with
-                    setTimeout(() => {
-                        if (!circularMenu.querySelector('.menu-item:hover')) {
-                            circularMenu.classList.remove('active');
-                        }
-                    }, 5000);
-                }, 300);
-            });
-        }
+        // We don't need click handlers here since they're handled in initSmoothScrolling
     }
 }
 

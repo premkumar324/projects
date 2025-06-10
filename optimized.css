@@ -2173,4 +2173,11 @@ section {
 #connectBtn.fade {
     opacity: 0.4 !important;
     cursor: pointer !important;
+}
+
+.mobile-nav.active ~ .floating-connect,
+.mobile-nav.active ~ .back-to-top {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
 } 
