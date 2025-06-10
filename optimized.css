@@ -388,6 +388,32 @@ section {
 
 /* Mobile styles */
 @media screen and (max-width: 768px) {
+    /* Mobile hero section spacing */
+    .hero-text h1 {
+        font-size: 1.75rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 2rem !important; /* Increased space after heading */
+    }
+
+    .hero-text p {
+        margin-bottom: 1.75rem !important;
+        line-height: 1.5 !important;
+    }
+
+    /* Show shorter description on mobile */
+    .hero-text p .desktop-desc {
+        display: none !important;
+    }
+
+    .hero-text p .mobile-desc {
+        display: inline !important;
+    }
+
+    .cta-buttons {
+        margin-top: 1.25rem !important;
+    }
+
+    /* Keep existing mobile styles */
     .back-to-top {
         width: 45px !important;
         height: 45px !important;
@@ -405,80 +431,6 @@ section {
     .back-to-top i,
     .floating-connect i {
         font-size: 1.125rem !important;
-    }
-
-    .hero {
-        min-height: 90vh !important;
-        padding: 2rem 1.5rem !important;
-    }
-
-    .hero-content {
-        flex-direction: column !important;
-        gap: 2rem !important;
-        padding-top: 2rem !important;
-        justify-content: flex-start !important;
-    }
-
-    .hero-text {
-        text-align: center !important;
-        gap: 1.25rem !important;
-        max-width: 100% !important;
-        order: 1 !important;
-    }
-
-    .hero-image {
-        order: 0 !important;
-        margin-bottom: 1rem !important;
-    }
-
-    .profile-container {
-        width: 260px !important;
-        height: 260px !important;
-        margin: 0 auto !important;
-    }
-
-    .profile-photo {
-        width: 240px !important;
-        height: 240px !important;
-    }
-
-    .tech-icons {
-        gap: 0.75rem !important;
-        margin-top: 1rem !important;
-    }
-
-    .tech-icon {
-        width: 35px !important;
-        height: 35px !important;
-        font-size: 1.25rem !important;
-    }
-
-    .hero-text h1 {
-        font-size: 2rem !important;
-        margin-bottom: 0.5rem !important;
-    }
-
-    .hero-text p {
-        font-size: 1rem !important;
-        line-height: 1.5 !important;
-        margin-bottom: 0.75rem !important;
-        padding: 0 0.5rem !important;
-    }
-
-    .cta-buttons {
-        gap: 1rem !important;
-        margin-top: 1.25rem !important;
-        justify-content: center !important;
-    }
-
-    .btn {
-        padding: 0.75rem 1.5rem !important;
-        font-size: 1rem !important;
-        min-width: auto !important;
-    }
-
-    .floating-shapes {
-        opacity: 0.35 !important;
     }
 }
 
@@ -636,25 +588,29 @@ section {
 
 /* Home Hero Section */
 .hero {
-    position: relative;
     min-height: 100vh;
+    padding: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    position: relative;
     overflow: hidden;
-    background-color: var(--dark);
 }
 
 .hero-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
     max-width: 1200px;
     width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
     position: relative;
     z-index: 1;
+}
+
+.hero-text {
+    display: flex !important;
+    flex-direction: column !important;
 }
 
 .hero-text h1 {
@@ -2029,28 +1985,6 @@ section {
         visibility: visible;
     }
     
-    .circular-menu .menu-item {
-        position: absolute;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: var(--primary);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #fff;
-        text-decoration: none;
-        transition: var(--transition-standard);
-        transform: scale(0) rotate(0deg);
-        opacity: 0;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    }
-    
-    .circular-menu.active .menu-item {
-        transform: scale(1) rotate(360deg);
-        opacity: 1;
-    }
-    
     /* Position each menu item in an arc */
     .circular-menu .menu-item:nth-child(1) {
         bottom: 60px;
@@ -2255,4 +2189,56 @@ section {
     opacity: 0 !important;
     pointer-events: none !important;
     visibility: hidden !important;
+}
+
+/* Mobile-specific description */
+.hero-text p .mobile-desc {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    /* Mobile hero section spacing */
+    .hero-text h1 {
+        font-size: 1.75rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 2rem !important; /* Increased space after heading */
+    }
+
+    .hero-text p {
+        margin-bottom: 1.75rem !important;
+        line-height: 1.5 !important;
+    }
+
+    /* Show shorter description on mobile */
+    .hero-text p .desktop-desc {
+        display: none !important;
+    }
+
+    .hero-text p .mobile-desc {
+        display: inline !important;
+    }
+
+    .cta-buttons {
+        margin-top: 1.25rem !important;
+    }
+
+    /* Keep existing mobile styles */
+    .back-to-top {
+        width: 45px !important;
+        height: 45px !important;
+        bottom: 1.5rem !important;
+        right: 1.5rem !important;
+    }
+
+    .floating-connect {
+        width: 45px !important;
+        height: 45px !important;
+        bottom: 1.5rem !important;
+        right: 5.5rem !important;
+    }
+
+    .back-to-top i,
+    .floating-connect i {
+        font-size: 1.125rem !important;
+    }
 } 
