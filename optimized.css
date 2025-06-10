@@ -398,10 +398,23 @@ section {
     .hero-text p {
         margin-bottom: 1.75rem !important;
         line-height: 1.5 !important;
+        position: relative !important;
+        z-index: 2 !important; /* Ensure text is above tech icons */
     }
 
     .cta-buttons {
         margin-top: 1.25rem !important;
+        position: relative !important;
+        z-index: 2 !important; /* Ensure buttons are above tech icons */
+    }
+
+    /* Adjust tech icons for mobile */
+    .tech-icons {
+        z-index: 1 !important; /* Place tech icons behind text */
+    }
+
+    .tech-icon {
+        opacity: 0.5 !important; /* Make icons more subtle on mobile */
     }
 
     /* Keep existing mobile styles */
@@ -2198,10 +2211,23 @@ section {
     .hero-text p {
         margin-bottom: 1.75rem !important;
         line-height: 1.5 !important;
+        position: relative !important;
+        z-index: 2 !important; /* Ensure text is above tech icons */
     }
 
     .cta-buttons {
         margin-top: 1.25rem !important;
+        position: relative !important;
+        z-index: 2 !important; /* Ensure buttons are above tech icons */
+    }
+
+    /* Adjust tech icons for mobile */
+    .tech-icons {
+        z-index: 1 !important; /* Place tech icons behind text */
+    }
+
+    .tech-icon {
+        opacity: 0.5 !important; /* Make icons more subtle on mobile */
     }
 
     /* Keep existing mobile styles */
