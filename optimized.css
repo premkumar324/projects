@@ -406,6 +406,80 @@ section {
     .floating-connect i {
         font-size: 1.125rem !important;
     }
+
+    .hero {
+        min-height: 90vh !important;
+        padding: 2rem 1.5rem !important;
+    }
+
+    .hero-content {
+        flex-direction: column !important;
+        gap: 2rem !important;
+        padding-top: 2rem !important;
+        justify-content: flex-start !important;
+    }
+
+    .hero-text {
+        text-align: center !important;
+        gap: 1.25rem !important;
+        max-width: 100% !important;
+        order: 1 !important;
+    }
+
+    .hero-image {
+        order: 0 !important;
+        margin-bottom: 1rem !important;
+    }
+
+    .profile-container {
+        width: 260px !important;
+        height: 260px !important;
+        margin: 0 auto !important;
+    }
+
+    .profile-photo {
+        width: 240px !important;
+        height: 240px !important;
+    }
+
+    .tech-icons {
+        gap: 0.75rem !important;
+        margin-top: 1rem !important;
+    }
+
+    .tech-icon {
+        width: 35px !important;
+        height: 35px !important;
+        font-size: 1.25rem !important;
+    }
+
+    .hero-text h1 {
+        font-size: 2rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    .hero-text p {
+        font-size: 1rem !important;
+        line-height: 1.5 !important;
+        margin-bottom: 0.75rem !important;
+        padding: 0 0.5rem !important;
+    }
+
+    .cta-buttons {
+        gap: 1rem !important;
+        margin-top: 1.25rem !important;
+        justify-content: center !important;
+    }
+
+    .btn {
+        padding: 0.75rem 1.5rem !important;
+        font-size: 1rem !important;
+        min-width: auto !important;
+    }
+
+    .floating-shapes {
+        opacity: 0.35 !important;
+    }
 }
 
 /* Social Links */
@@ -562,22 +636,23 @@ section {
 
 /* Home Hero Section */
 .hero {
+    position: relative;
     min-height: 100vh;
-    padding: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
+    padding: 2rem;
     overflow: hidden;
+    background-color: var(--dark);
 }
 
 .hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
     max-width: 1200px;
     width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
     position: relative;
     z-index: 1;
 }
