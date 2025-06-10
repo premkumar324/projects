@@ -302,34 +302,110 @@ section {
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
+/* Floating Action Buttons Container */
+.floating-actions {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    z-index: 1000;
+    pointer-events: none; /* Allow clicking through the container */
+}
+
 /* Back to top button */
 .back-to-top {
-    position: fixed;
-    bottom: 7rem;
-    right: 2rem;
-    background: var(--gradient);
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--light);
-    text-decoration: none;
-    opacity: 0;
-    transition: var(--transition-standard);
-    transform: translateY(100px);
-    z-index: 99;
+    position: fixed !important;
+    bottom: 7rem !important;
+    right: 2rem !important;
+    width: 50px !important;
+    height: 50px !important;
+    background: var(--gradient) !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    opacity: 0 !important;
+    transform: translateY(100px) !important;
+    transition: all 0.3s ease !important;
+    z-index: 999 !important;
 }
 
 .back-to-top.visible {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1 !important;
+    transform: translateY(0) !important;
 }
 
 .back-to-top:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(129, 212, 250, 0.3);
+    transform: translateY(-5px) !important;
+    box-shadow: 0 5px 15px rgba(129, 212, 250, 0.3) !important;
+}
+
+.back-to-top i {
+    color: var(--light) !important;
+    font-size: 1.25rem !important;
+}
+
+/* Floating connect button */
+.floating-connect {
+    position: fixed !important;
+    bottom: 2rem !important;
+    right: 2rem !important;
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 50% !important;
+    background: var(--gradient) !important;
+    display: none !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    transform: scale(0) !important;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+    z-index: 999 !important;
+}
+
+.floating-connect.visible {
+    display: flex !important;
+    transform: scale(1) !important;
+}
+
+.floating-connect:hover {
+    transform: scale(1.1) !important;
+}
+
+.floating-connect i {
+    color: var(--light) !important;
+    font-size: 1.25rem !important;
+}
+
+.floating-connect.fade {
+    opacity: 0.4 !important;
+    cursor: pointer !important;
+}
+
+/* Mobile styles */
+@media screen and (max-width: 768px) {
+    .back-to-top {
+        width: 45px !important;
+        height: 45px !important;
+        bottom: 1.5rem !important;
+        right: 1.5rem !important;
+    }
+
+    .floating-connect {
+        width: 45px !important;
+        height: 45px !important;
+        bottom: 1.5rem !important;
+        right: 5.5rem !important;
+    }
+
+    .back-to-top i,
+    .floating-connect i {
+        font-size: 1.125rem !important;
+    }
 }
 
 /* Social Links */
@@ -2042,4 +2118,59 @@ section {
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
+}
+
+.floating-connect {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--gradient);
+    display: none; /* Hide by default */
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000; /* Ensure it's above other elements */
+    transform: scale(0);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.floating-connect.visible {
+    display: flex;
+    transform: scale(1);
+}
+
+.floating-connect:hover {
+    transform: scale(1.1);
+}
+
+.floating-connect i {
+    color: var(--light);
+    font-size: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .floating-connect {
+        width: 50px; /* Slightly smaller on mobile */
+        height: 50px;
+        bottom: 1.5rem; /* Adjust position on mobile */
+        right: 1.5rem;
+    }
+
+    .floating-connect i {
+        font-size: 1.25rem; /* Slightly smaller icon on mobile */
+    }
+}
+
+/* Modify existing connect button styles */
+#connectBtn {
+    transition: opacity 0.3s ease !important;
+}
+
+#connectBtn.fade {
+    opacity: 0.4 !important;
+    cursor: pointer !important;
 } 

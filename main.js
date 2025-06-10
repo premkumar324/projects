@@ -313,19 +313,35 @@ function initViewDetailsButtons() {
 
 // Initialize back to top button
 function initBackToTop() {
-    const backToTopButton = document.querySelector('.back-to-top');
+    const backToTop = document.querySelector('.back-to-top');
     
-    if (backToTopButton) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 500) {
-                backToTopButton.classList.add('visible');
+    if (backToTop) {
+        // Show/hide back to top button based on scroll position
+        function toggleBackToTop() {
+            if (window.pageYOffset > 500) {
+                backToTop.classList.add('visible');
             } else {
-                backToTopButton.classList.remove('visible');
+                backToTop.classList.remove('visible');
+            }
+        }
+
+        // Initial check
+        toggleBackToTop();
+        
+        // Add scroll event listener with throttling
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    toggleBackToTop();
+                    ticking = false;
+                });
+                ticking = true;
             }
         });
         
-        backToTopButton.addEventListener('click', (e) => {
-            e.preventDefault();
+        // Smooth scroll to top when clicked
+        backToTop.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
@@ -337,28 +353,101 @@ function initBackToTop() {
 // Initialize connect button functionality
 function initConnectButton() {
     const connectBtn = document.getElementById('connectBtn');
+    const floatingConnect = document.querySelector('.floating-connect');
     const circularMenu = document.querySelector('.circular-menu');
     
-    if (connectBtn && circularMenu) {
-        connectBtn.addEventListener('click', () => {
+    if (connectBtn && floatingConnect && circularMenu) {
+        // Function to check if element is out of viewport
+        function isOutOfViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return (
+                rect.bottom < 0 || // Element is above viewport
+                rect.top > (window.innerHeight || document.documentElement.clientHeight) // Element is below viewport
+            );
+        }
+
+        // Function to close circular menu
+        function closeCircularMenu() {
+            circularMenu.classList.remove('active');
+            connectBtn.classList.remove('fade');
+            floatingConnect.classList.remove('fade');
+        }
+
+        // Function to toggle circular menu
+        function toggleCircularMenu() {
+            const isOpening = !circularMenu.classList.contains('active');
             circularMenu.classList.toggle('active');
             
-            // Auto-hide after 5 seconds if not interacted with
-            if (circularMenu.classList.contains('active')) {
-                setTimeout(() => {
-                    if (!circularMenu.querySelector('.menu-item:hover')) {
-                        circularMenu.classList.remove('active');
-                    }
-                }, 5000);
+            if (isOpening) {
+                connectBtn.classList.add('fade');
+                floatingConnect.classList.add('fade');
+            } else {
+                connectBtn.classList.remove('fade');
+                floatingConnect.classList.remove('fade');
+            }
+        }
+
+        // Handle scroll event
+        function handleScroll() {
+            if (window.innerWidth <= 768) { // Only for mobile screens
+                if (isOutOfViewport(connectBtn)) {
+                    floatingConnect.classList.add('visible');
+                } else {
+                    floatingConnect.classList.remove('visible');
+                }
+            }
+        }
+
+        // Initial check
+        handleScroll();
+
+        // Add scroll event listener with throttling
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    handleScroll();
+                    ticking = false;
+                });
+                ticking = true;
             }
         });
+
+        // Handle window resize
+        window.addEventListener('resize', handleScroll);
         
-        // Close circular menu when clicking outside
+        // Handle floating connect button click
+        floatingConnect.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleCircularMenu();
+        });
+
+        // Handle original connect button click
+        connectBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleCircularMenu();
+        });
+
+        // Close menu when clicking on circular menu items
+        circularMenu.addEventListener('click', (e) => {
+            if (e.target !== circularMenu) {
+                closeCircularMenu();
+            }
+        });
+
+        // Close menu when clicking anywhere else on the document
         document.addEventListener('click', (e) => {
-            if (circularMenu.classList.contains('active') && 
-                !circularMenu.contains(e.target) && 
-                e.target !== connectBtn) {
-                circularMenu.classList.remove('active');
+            if (!circularMenu.contains(e.target) && 
+                e.target !== connectBtn && 
+                e.target !== floatingConnect) {
+                closeCircularMenu();
+            }
+        });
+
+        // Close menu when pressing Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeCircularMenu();
             }
         });
     }
