@@ -1,0 +1,188 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{needspace}
+\usepackage{setspace}
+
+% ---------- PAGE SETUP ----------
+\geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=22mm,
+ top=22mm,
+}
+
+\setstretch{1.1}
+
+\hypersetup{
+    colorlinks=true,
+    urlcolor=blue,
+}
+
+\pagestyle{empty}
+
+% ---------- CUSTOM COMMANDS ----------
+\newcommand{\myName}[1]{\Huge \textbf{#1}}
+
+\newcommand{\myContact}[1]{\small #1}
+
+\newcommand{\sectionTitle}[1]{
+    \par\vspace{12pt}
+    \Needspace{3\baselineskip}
+    \noindent\textbf{\large #1}
+    \par\vspace{2pt}\hrule\vspace{6pt}
+}
+
+\newcommand{\resumeEntry}[4]{
+    \begin{itemize}[leftmargin=*, label={}]
+        \item \textbf{#1} \hfill #2
+        \item \textit{#3} \hfill #4
+    \end{itemize}
+}
+
+\newcommand{\projectEntry}[2]{
+    \begin{itemize}[leftmargin=*, label={}]
+        \item \textbf{#1} \hfill \href{#2}{\small{[Live Link]}}
+    \end{itemize}
+}
+
+\newcommand{\descriptionItem}[1]{
+    \begin{itemize}[leftmargin=2em, itemsep=4pt, topsep=4pt]
+        \item #1
+    \end{itemize}
+}
+
+\newcommand{\skillList}[2]{
+    \begin{itemize}[leftmargin=*, label={}]
+        \item \textbf{#1:} #2
+    \end{itemize}
+}
+
+\newcommand{\certificationEntry}[2]{
+     \begin{itemize}[leftmargin=*, label={}]
+        \item #1 \hfill \textit{#2}
+     \end{itemize}
+}
+
+% ---------- DOCUMENT START ----------
+\begin{document}
+
+% ----- HEADER -----
+\begin{center}
+    \myName{Premkumar Lande} \\[4pt]
+    \myContact{
+    Pune, Maharashtra |
+    +91-9309954419 |
+    \href{mailto:premkumarlande.skn.comp@gmail.com}{premkumarlande.skn.comp@gmail.com} |
+    \href{https://premkumar324.github.io/projects/index.html}{Portfolio}
+    }
+\end{center}
+
+% ----- SUMMARY -----
+\sectionTitle{Summary}
+
+Placement-ready final-year Computer Science student with strong foundations in Data Structures and Algorithms, Object-Oriented Programming, and Database Management Systems. Experienced in full-stack web development using React.js, Node.js, Express.js, MongoDB, and Appwrite. Currently working as a MERN Stack Intern and seeking Software Engineer opportunities.
+
+% ----- EXPERIENCE -----
+\sectionTitle{Experience}
+
+\resumeEntry
+{MERN Stack Intern}
+{05/2026 -- Present}
+{Wargstech, Pune}
+{Performance-Based Internship}
+
+\descriptionItem{Developing and maintaining full-stack web applications using MongoDB, Express.js, React.js, and Node.js.}
+
+\descriptionItem{Building responsive user interfaces and backend APIs for business and educational platforms.}
+
+\descriptionItem{Collaborating with developers and stakeholders to implement new features and improve existing workflows.}
+
+\descriptionItem{Using Git and GitHub for version control, code management, and team collaboration.}
+
+\descriptionItem{Participating in debugging, testing, deployment, and performance optimization activities.}
+
+% ----- EDUCATION -----
+\sectionTitle{Education}
+
+\resumeEntry
+{B.E. - Computer Science \& Engineering}
+{08/2022 -- 07/2026}
+{Shrimati Kashibai Navale College Of Engineering, Pune}
+{CGPA: 8.26/10}
+
+\resumeEntry
+{CBSE 12th}
+{2022}
+{Army Public School, Pune}
+{Percentage: 74.60\%}
+
+\resumeEntry
+{CBSE 10th}
+{2020}
+{Army Public School, Pune}
+{Percentage: 88.88\%}
+
+% ----- SKILLS -----
+\sectionTitle{Skills}
+
+\skillList{Languages}{JavaScript, Java, C++, SQL}
+
+\skillList{Frontend}{React.js, Redux Toolkit, Tailwind CSS, HTML/CSS}
+
+\skillList{Backend}{Node.js, Express.js, REST APIs, Appwrite}
+
+\skillList{Databases \& AI}{MongoDB, SQL, RAG, Vector Search, AI Integration}
+
+\skillList{Developer Tools}{Git, GitHub, Vercel, Postman, JWT Auth}
+
+\skillList{CS Fundamentals}{Data Structures and Algorithms (DSA), Object-Oriented Programming (OOPs), Database Management Systems (DBMS)}
+
+% ----- PROJECTS -----
+\sectionTitle{Projects}
+
+\projectEntry
+{SinhgadConnect -- AI-Powered College Community Platform}
+{https://premkumar324.github.io/projects/index.html}
+
+\descriptionItem{Engineered a full-stack community platform enabling students to share posts, questions, and announcements using React.js, Node.js, Express.js, and MongoDB.}
+
+\descriptionItem{Implemented a Retrieval Augmented Generation (RAG) chatbot that retrieves relevant posts via cosine similarity and generates grounded responses using Google Gemini API.}
+
+\descriptionItem{Built semantic search using 768-dimensional embeddings for intelligent content discovery.}
+
+\descriptionItem{Integrated AI-powered features including automatic post summarization, sentiment analysis, and tag generation.}
+
+\descriptionItem{Designed a responsive React frontend with real-time updates and a modern user experience.}
+
+\projectEntry
+{Pixie -- Photo Sharing Social App}
+{https://pixie-photo-sharing-app.vercel.app/}
+
+\descriptionItem{Designed, developed, and deployed a full-stack social media application enabling real-time photo uploads and a dynamic public feed using React.js and Appwrite.}
+
+\descriptionItem{Implemented secure authentication and profile management features to ensure user data privacy.}
+
+\descriptionItem{Built responsive user interfaces and optimized performance for seamless user experience across devices.}
+
+\descriptionItem{Leveraged Appwrite's Backend-as-a-Service capabilities for database management, authentication, and storage.}
+
+% ----- CERTIFICATIONS -----
+\sectionTitle{Certifications}
+
+\certificationEntry
+{Data Structures and Algorithms with C++}
+{Physics Wallah | 03/2024}
+
+\certificationEntry
+{SQL and Relational Database 101}
+{IBM | 07/2025}
+
+\certificationEntry
+{Java Complete Java Core}
+{Udemy | 08/2025}
+
+\end{document}

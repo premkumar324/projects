@@ -487,4 +487,6 @@ function initSkillBars() {
     skillCards.forEach(card => {
         observer.observe(card);
     });
-} 
+}
+
+ 
